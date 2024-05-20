@@ -2,14 +2,14 @@ haos2024.05main 20.05.2024 13:27
 
 # haos2024.05/tree/main - yaml main esphome files 
 ### note: source main (srv7@7wlan) 
-<img src='srv7wlan7haos_main.png' width='50%'/>
+<img src='git-pics/pcb-srv7wlan7haos_main.png' width='50%'/>
 
 # haos2024.05/tree/dev - yaml backup esphome files 
 ### note: source dev (srv7@6wlan) 
-<img src='srv7wlan6haos_dev.png' width='50%'/>
+<img src='git-pics/pcb-srv7wlan6haos_dev.png' width='50%'/>
 
 # haos v1.2.3 dashboard home panel env.overview (srv1+srv2+srv7@7wlan) 
-<img src='srv7wlan7haos_energies123.png' width='70%'/>
+<img src='git-pics/pcb-srv7wlan7haos_srv127.png' width='70%'/>
 
 # env.0 az32 = home lab (guest_room) az-esp32v4
 <img src='ch0-600_haos11_sensors_az32guest.png' width='70%'/>
