@@ -10,10 +10,6 @@ haos2024.05main 20.05.2024 13:27
 
 # haos v1.2.3 dashboard home panel env.overview (srv1+srv2+srv7@7wlan) 
 <img src='git-pics/pcb-srv7wlan7haos_srv127.png' width='70%'/>
- overview env location w.i.p. (location:ort)  az-esp32v4
-<img src='git-pics/pcb-floorplan.png' width='50%'/>
-  overview env connected w.i.p. (speed:verbindung) mesh-wifi
-<img src='git-pics/pcb-env_nas1+2+3_6wlan.png' width='50%'/>
 
 # env.0 az32a00 = home lab (guest_room)
 <img src='git-pics/pcb-a00.jpg' width='70%'/>
@@ -50,7 +46,7 @@ env: relais(incl led) + dht11
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a04.yaml</a>
 <img src='git-pics/pcb-a04side.png' width='50%'/>
 
-env.5 az32a05 = flur (todo motion a05-b05) wip(pir)
+# env.5 az32a05 = flur (todo motion a05-b05) wip(pir)
 <img src='git-pics/pcb-a05.jpg' width='70%'/>
 
 env: relais(incl led) + fotosensor + pir) 
@@ -66,6 +62,11 @@ env: relais(incl led) +temp1=bme280 +temp2=dht11
 
 wip-changelog200524-1437: 
 todo hyperlinks in readme to yaml file links 
+
+ overview env location w.i.p. (location:ort)  az-esp32v4
+<img src='git-pics/pcb-floorplan.png' width='50%'/>
+  overview env connected w.i.p. (speed:verbindung) mesh-wifi
+<img src='git-pics/pcb-env_nas1+2+3_6wlan.png' width='50%'/>
 
 wip-changelog200524-1438: 
 added flur part unten b05 + wip rgb stripe 5m 
