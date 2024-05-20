@@ -1,16 +1,8 @@
 haos2024.05main 20.05.2024
 
-# 32wroom tutorials - yaml test files 
+# haos2024.05/tree/main) - yaml esphome files 
 ## fn-esp32s3 (breadboard cam)
-
-### Freenove_Ultimate_Starter_Kit_for_ESP32-S3 FNK0082 A1B0 
-<img src='ch0-001_ultimate_box_unboxed_close.jpg' width='50%'/>
-
-### note2: fnk0082 ult. part list
-<img src='ch0-002_esp32-s3_fnk0082_part_list.jpg' width='70%'/>
-
-### note3: board + 10x led-bar + 10x 220ohm resistors 
-### use GPIO5 taster2 running lights 
+### note: 
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">ch0-001_esphome-web-e911d0.yaml</a>
 <img src='ch0-003_ultimate_box_unboxed_board.jpg' width='50%'/>
 
@@ -18,14 +10,7 @@ haos2024.05main 20.05.2024
 <img src='ch0-004_esp32-s3_wroom+cam+2usb_pinout.png' width='70%'/>
 https://www.youtube.com/playlist?list=PLlCFIOdyWXfXNI98tTjUfWsx7-i59nKBr
 
-# az-esp32v4 (solded testboard dotted pcb)  
-### note: source GIMP handdraw reajust real pin out chip 
-<img src='ch0-101_az32_pcb_bot.jpg' width='50%'/>
-<img src='ch0-102_az_32chip.png' width='50%'/>
-<img src='ch0-103_az32_pcb_bot2+dotted-pcb.jpg' width='50%'/>
-<img src='ch0-104_esp32-v4_wroom_pinout_az32.png' width='50%'/>
-<img src='ch0-105_cb32_pcb_top.jpg' width='50%'/>
-<img src='ch0-106_cb32_pcb_top+relais.jpg' width='50%'/>
+# az-esp32v4 (pcb)  
 
 # haos v11.1 dashboard home panel overview 
 <img src='ch0-200_all_dht11room_esphome-haos11_sensors.png' width='70%'/>
