@@ -1,17 +1,14 @@
 haos2024.05main 20.05.2024
 
-# haos2024.05/tree/main) - yaml esphome files 
-### note: 
-### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">ch0-001_esphome-web-e911d0.yaml</a>
+# haos2024.05/tree/main - yaml esphome files 
+### note: source dev
 <img src='srv7wlan7haos_main.png' width='50%'/>
 
-### note4: source Freenove tutorial chapters playlist
+### note: source dev az-esp32v4 (pcb) 
 <img src='srv7wlan6haos_dev.png' width='70%'/>
 
-# az-esp32v4 (pcb)  
-
-# haos v11.1 dashboard home panel overview 
-<img src='ch0-200_all_dht11room_esphome-haos11_sensors.png' width='70%'/>
+# haos v1.2.3 dashboard home panel overview env
+<img src='srv7wlan7haos_energies123.png' width='50%'/>
 
 ## note: haos esphome devices panel overview
 <img src='ch0-201_esp32-s3_wroom+5x-az3200x+cb32_esphome-haos11.png' width='70%'/>
