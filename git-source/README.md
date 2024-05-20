@@ -1,12 +1,12 @@
-haos2024.05main 20.05.2024 13:27
+haos2024.05main/git-source  20.05.2024 15:54
 
-# haos2024.05/tree/main - yaml main esphome files 
-### note: source main (srv7@7wlan) 
-<img src='git-pics/pcb-srv7wlan7haos_main.png' width='50%'/>
+# haos2024.05/tree/main/git-source - yaml all esphome files 
+### note: source main + _fonts + _icons
+<img src='git-pics/pcb-a00toc05.png' width='50%'/>
 
 # haos2024.05/tree/dev - yaml backup esphome files 
 ### note: source dev (srv7@6wlan) 
-<img src='git-pics/pcb-srv7wlan6haos_dev.png' width='50%'/>
+<img src='git-pics/pcb-a00toc05.png' width='50%'/>
 
 # haos v1.2.3 dashboard home panel env.overview (srv1+srv2+srv7@7wlan) 
 <img src='git-pics/pcb-srv7wlan7haos_srv127.png' width='70%'/>
