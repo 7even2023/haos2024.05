@@ -11,12 +11,13 @@ haos2024.05main 20.05.2024 13:27
 # haos v1.2.3 dashboard home panel env.overview (srv1+srv2+srv7@7wlan) 
 <img src='git-pics/pcb-srv7wlan7haos_srv127.png' width='70%'/>
  overview env location w.i.p. (location:ort)  az-esp32v4
-<img src='git-pics/pcb-floorplan.png' width='70%'/>
+<img src='git-pics/pcb-floorplan.png' width='50%'/>
   overview env connected w.i.p. (speed:verbindung) mesh-wifi
 <img src='git-pics/pcb-env_nas1+2+3_6wlan.png' width='50%'/>
 
 # env.0 az32a00 = home lab (guest_room)
 <img src='git-pics/pcb-a00.jpg' width='70%'/>
+
 ### button + relais(incl led) + bme280
 ### note: value id temp + humi + press
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a00.yaml</a>
@@ -24,6 +25,7 @@ haos2024.05main 20.05.2024 13:27
 
 # env.1 az32a01 = kueche (kitchen)
 <img src='git-pics/pcb-a01.jpg' width='70%'/>
+
 ### button + relais(incl led) + bme280
 ### note: value id temp + humi + press
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a01.yaml</a>
@@ -31,6 +33,7 @@ haos2024.05main 20.05.2024 13:27
 
 # env.2 az32a02 = bad (bath)
 <img src='git-pics/pcb-a02.jpg' width='70%'/>
+
 ### button + relais(incl led) + bme280 
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a02.yaml</a>
 <img src='git-pics/pcb-a02.jpg' width='50%'/>
