@@ -1,7 +1,7 @@
-haos2024.05main 20.05.2024
+haos2024.05main 20.05.2024 13:27
 
-# haos2024.05/tree/main - yaml esphome files 
-### note: source main (srv1+srv2@7wlan) 
+# haos2024.05/tree/main - yaml main esphome files 
+### note: source main (srv7@7wlan) 
 <img src='srv7wlan7haos_main.png' width='50%'/>
 
 # haos2024.05/tree/dev - yaml backup esphome files 
