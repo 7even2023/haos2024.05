@@ -5,7 +5,9 @@ haos2024.05main 20.05.2024 13:27
 
 Home Assistant 2024 05 20 2xwlan 
 
-Video: https://www.youtube.com/watch?v=jPW5DhYZHiI
+Video: 
+
+https://www.youtube.com/watch?v=jPW5DhYZHiI
 
 <a href="https://www.youtube.com/watch?v=jPW5DhYZHiI">Video<img src='git-pics/pcb-srv7wlan7haos_main.png' width='50%'/></a>
 
