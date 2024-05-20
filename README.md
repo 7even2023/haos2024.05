@@ -72,6 +72,8 @@ overview env connected w.i.p. (speed:verbindung) mesh-wifi
 
 <img src='git-pics/pcb-env_nas1+2+3_6wlan.png' width='50%'/>
 
-wip-changelog200524-1438: 
-added flur part unten b05 + wip rgb stripe 5m 
+wip-changelog200524-1527: 
+
 todo add all yaml-projects in git-source
+
+added flur part unten b05 
