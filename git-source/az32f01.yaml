@@ -1,0 +1,177 @@
+esphome:
+  name: az32f01
+  friendly_name: az32f01
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+# level: none # default
+# level: error
+# level: warn
+# level: info
+  level: debug
+# level: verbose
+# level: very_verbose
+
+#mdns:
+#  disabled: false
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "x+HKGYfBgrBjrCt2c5FBrLk9IUgK+GBLozxWmfezKIw="
+
+ota:
+  password: "c909206f1243c0a4a80216f7a40df79c"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Az32F01 Fallback Hotspot"
+    password: "ypgcqCq4eKqb"
+
+captive_portal:
+
+web_server:
+  port: 80
+
+time:
+  - platform: sntp
+    id: esphome_time
+    servers:
+      - 0.pool.ntp.org
+
+binary_sensor:
+  - platform: status
+    name: "f01 Status"  
+    id: f01_status
+
+  - platform: gpio
+    pin: GPIO35 
+    name: "f01 taster35"
+    id: f01_taster35
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms     
+#    on_press:
+#      then:
+#      - switch.toggle: my_led 
+#      - delay: 1000ms
+    on_release:
+      then: 
+      - switch.toggle: pin23 #25
+      - delay: 500ms
+      - switch.toggle: pin19 #26
+      - delay: 500ms
+      - switch.toggle: pin18 #27
+      - delay: 500ms
+      - switch.toggle: pin4 #14
+      - delay: 500ms
+      - switch.toggle: pin2 #12
+      - delay: 500ms
+
+# Component xxxxxx took a long time for an operation  10kHz min 20works def 50kHz  fix = frequency 400kHz
+i2c:
+   - id: bus_a
+     sda: GPIO21
+     scl: GPIO22
+     scan: true
+     #frequency: 400kHz
+   - id: bus_b
+     sda: GPIO16
+     scl: GPIO17
+     scan: true
+     #frequency: 10kHz
+
+sensor:
+  - platform: bme280_i2c
+    i2c_id: bus_a
+    address: 0x76
+    temperature:
+      name: "BME280a Temperature"
+      id: f01_bme280a_temperature
+    pressure:
+      name: "BME280a Pressure"
+      id: f01_bme280a_pressure
+    humidity:
+      name: "BME280a Humidity"
+      id: f01_bme280a_humidity
+    update_interval: 30s #15 test1 sync foto msg console ,20 eco
+
+  - platform: bme280_i2c
+    i2c_id: bus_b
+    address: 0x76
+    temperature:
+      name: "BME280b Temperature"
+      id: f01_bme280b_temperature
+    pressure:
+      name: "BME280b Pressure"
+      id: f01_bme280b_pressure
+    humidity:
+      name: "BME280b Humidity"
+      id: f01_bme280b_humidity
+    update_interval: 30s #10s= errors,  40s slow cold ice
+
+  - platform: wifi_signal
+    name: "f01 WiFi Signal"
+    id: f01_wifisignal
+    update_interval: 4s     #60s
+    filters:
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 15
+          send_first_at: 1
+
+  - platform: uptime
+    name: "f01 Uptime Sensor" 
+    id: f01_uptimesensor
+
+switch:
+  - platform: restart
+    name: "f01 Restart"
+    id: f01_restart   
+
+  - platform: shutdown
+    name: "f01 Shutdown"  
+    id: f01_shutdown
+
+  - platform: gpio
+    pin: GPIO23
+    id: pin23
+    name: "23Relais1"
+
+  - platform: gpio
+    pin: GPIO19
+    id: pin19
+    name: "19Relais2"
+
+  - platform: gpio
+    pin: GPIO18
+    id: pin18
+    name: "18Relais3"
+
+  - platform: gpio
+    pin: GPIO4
+    id: pin4
+    name: "04Relais4"
+
+  - platform: gpio
+    pin: GPIO2
+    id: pin2
+    name: "02Relais5"
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "f01 IP Address"
+      id: f01_ipaddress
+    ssid:
+      name: "f01 Connected SSID"
+      id: f01_connectedssid

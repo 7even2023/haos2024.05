@@ -1,0 +1,379 @@
+substitutions:
+  devicename: az32a05
+  friendly_name: a05
+  # ------------------
+  #   Pin-Belegung / Switch     # GND über 19   kabel schwarz/black
+  # ------------------
+  statusled_01red_pin: GPIO26   # a01 26Relais1 kabel lila/purple
+  statusled_02green_pin: GPIO19 # a01 19Relais2 kabel grau/grey
+  statusled_03blue_pin: GPIO18  # a01 18Relais3 kabel weiss/white
+  
+  statusled_04red_pin: GPIO4    # a01 04Relais4 kabel blau/blue
+  statusled_05green_pin: GPIO2  # a01 02Relais5 Kabel grün/green
+
+  pir_pin: GPIO25               # a01 Bewegung
+  led_pin: GPIO27               # a01 27Relais0
+  rgb_pin: GPIO14               # a01_light 8x WS2812B
+
+esphome:
+  name: ${devicename}
+  friendly_name: ${friendly_name}
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+# level: none # default
+# level: error
+# level: warn
+# level: info
+#  level: debug
+# level: verbose
+# level: very_verbose
+
+# Example configuration entry with additional service , ping port
+mdns:
+  disabled: false #default
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "IsnnSnBfAFp4QBFak7t5uj2Ljhvw+KFYtvzcYsOHpI4="
+
+ota:
+  password: "af55f5b8d03c538862e453483b17bf2e"
+
+wifi:
+  ssid: 6wlan # !secret wifi_ssid  
+  password: !secret wifi_password
+  ap:
+    ssid: "Az32A05 Fallback Hotspot"
+    password: "qAzQrphjkJhE"
+
+captive_portal: # fallback webseite netzwerkauswahl
+
+#web_server:  # aktiv mit domain: ".local"
+  # port: 80 
+
+time:
+  - platform: sntp
+    id: esphome_time
+    servers:
+      - 0.pool.ntp.org
+  
+binary_sensor:
+  - platform: status
+    name: "${friendly_name} Status"  
+    id: ${friendly_name}_status
+
+  - platform: gpio
+    pin: ${pir_pin}
+    name: "${friendly_name} Bewegung"
+    device_class: motion
+    id: ${friendly_name}_motion # rgbtreppe_pir_o
+    on_press:
+      then:
+        # - script.execute: treppe_runter_aktivieren
+        - switch.turn_on: statusled_01red_id
+        - switch.turn_on: statusled_02green_id
+        #- light.turn_on: blue_led_light
+        - delay: 1s
+        - switch.turn_off: statusled_01red_id
+        #- delay: 500ms
+    on_release:
+      then: 
+        - switch.turn_off: statusled_02green_id
+        #- delay: 11s
+        #- light.turn_off: blue_led_light
+
+  - platform: gpio
+    pin: GPIO34 
+    name: "${friendly_name} taster1"
+    id: ${friendly_name}_taster1   
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms  
+    on_press:
+      then:
+      - switch.toggle: led_id
+      - delay: 500ms
+
+
+  - platform: gpio
+    pin: GPIO35 
+    name: "${friendly_name} taster2"
+    id: ${friendly_name}_taster2
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms     
+    on_release:
+      then: 
+      - switch.toggle: statusled_01red_id
+      - delay: 500ms
+      - switch.toggle: statusled_02green_id
+      - delay: 500ms
+      - light.toggle: ${friendly_name}_blue_led_light #statusled_03blue_id
+      - delay: 500ms
+      - switch.toggle: statusled_04red_id
+      - delay: 500ms
+      - switch.toggle: statusled_05green_id
+      - delay: 500ms
+
+  - platform: template
+    name: "${friendly_name} Sensor32 hell"
+    lambda: |-
+          if (id(source_sensor0).state > 70) {
+            return true;
+          } else {
+            return false;
+          }
+
+  - platform: template
+    name: "${friendly_name} Sensor33 hell"
+    lambda: |-
+          if (id(source_sensor2).state > 70) {
+            return true;
+          } else {
+            return false;
+          }
+
+i2c:
+  sda: GPIO21
+  scl: GPIO22
+  scan: true
+  id: bus_a
+     
+sensor:
+  - platform: bme280_i2c
+    temperature:
+      name: "${friendly_name} BME280 Temperature"
+      id: ${friendly_name}_bme280_temperature
+    pressure:
+      name: "${friendly_name} BME280 Pressure"
+      id: ${friendly_name}_bme280_pressure
+    humidity:
+      name: "${friendly_name} BME280 Relative Humidity"
+      id: ${friendly_name}_bme280_humidity
+    address: 0x76
+    update_interval: 30s
+
+  - platform: wifi_signal
+    name: "${friendly_name} WiFi Signal"
+    id: ${friendly_name}_wifisignal
+    update_interval: 4s     #60s
+    filters:
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 15
+          send_first_at: 1
+
+  - platform: uptime
+    name: "${friendly_name} Uptime Sensor" 
+    id: ${friendly_name}_uptimesensor
+
+  # Fotowiderstand (rechts intern):
+  -  platform: adc
+     id: source_sensor0
+     name: "${friendly_name} Foto Sensor32"
+     pin: GPIO32  #33 orginal
+     update_interval: 15s # 60s
+     filters:
+        - offset: 0.0
+        - multiply: 1.0  #3.3
+        - calibrate_linear:
+          - 0.0733 -> -10.00     
+          - 0.5 -> 60.00            
+          - 1.045 -> 89.199        
+     unit_of_measurement: "%"
+     
+  # Fotowiderstand (links extern):
+  -  platform: adc
+     id: source_sensor2
+     name: "${friendly_name} Foto Sensor33"
+     pin: GPIO33  #33 orginal
+     update_interval: 20s # 60s
+     filters:
+        - offset: 0.0
+        - multiply: 1.0  #3.3
+        - calibrate_linear:
+          - 0.0733 -> -10.00     
+          - 0.5 -> 60.00            
+          - 1.045 -> 89.199        
+     unit_of_measurement: "%"
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      id: ${friendly_name}_ipaddress
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      id: ${friendly_name}_connectedssid
+
+switch:
+  - platform: restart
+    name: "${friendly_name} Restart"
+    id: ${friendly_name}_restart   
+
+#  - platform: shutdown
+#    name: "${friendly_name} Shutdown"  
+#    id: ${friendly_name}_shutdown
+
+  - platform: gpio
+    pin: ${statusled_01red_pin}
+    id: statusled_01red_id
+    name: "${friendly_name} 26Relais1"
+
+  - platform: gpio
+    pin: ${statusled_02green_pin}
+    id: statusled_02green_id
+    name: "${friendly_name} 19Relais2"
+
+#  - platform: gpio
+#    pin: ${statusled_03blue_pin}
+#    id: statusled_03blue_id
+#    name: "${friendly_name} 18Relais3"
+
+  - platform: gpio
+    pin: ${statusled_04red_pin}
+    id: statusled_04red_id
+    name: "${friendly_name} 04Relais4"
+
+  - platform: gpio
+    pin: ${statusled_05green_pin}
+    id: statusled_05green_id
+    name: "${friendly_name} 02Relais5"
+
+  - platform: gpio
+    pin: ${led_pin}
+    id: led_id
+    name: "${friendly_name} 27Relais0"
+    on_turn_on:
+    - logger.log: "Switch Turned On! red"
+    - switch.turn_on: statusled_04red_id
+    - switch.turn_off: statusled_05green_id
+    on_turn_off:
+    - logger.log: "Switch Turned Off! green"
+    - switch.turn_off: statusled_04red_id
+    - switch.turn_on: statusled_05green_id
+
+output:
+  # Register the blue LED as a dimmable output ....
+  - platform: ledc #esp8266_pwm
+    id: ${friendly_name}_blue_led
+    pin: ${statusled_03blue_pin}
+    #inverted: true
+
+light:
+  # ... and then make a light out of it.
+  - platform: monochromatic
+    name: "${friendly_name} Light Blue LED"
+    output: ${friendly_name}_blue_led
+    #internal: true
+    id: ${friendly_name}_blue_led_light
+    default_transition_length: 500ms # 1s = 1000ms
+
+  - platform: fastled_clockless
+    chipset: WS2812B
+    pin: ${rgb_pin}                                 # GPIO14
+    num_leds: 8                                     # 8 - 60
+    rgb_order: GRB
+    name: "${friendly_name} Light"  #FastLED NEOPIXEL Light
+    id: ${friendly_name}_light
+    default_transition_length: 1s
+    restore_mode: ALWAYS_OFF
+    effects:
+      - random:
+      - random:
+          name: Random Effect With Custom Values
+          transition_length: 2s
+          update_interval: 3s
+      - strobe:
+      - strobe:
+          name: Strobe Effect With Custom Values
+          colors:
+            - state: true
+              brightness: 100%
+              red: 100%
+              green: 00%
+              blue: 0%
+              duration: 500ms
+            - state: false
+              duration: 250ms
+            - state: true
+              brightness: 100%
+              red: 0%
+              green: 100%
+              blue: 0%
+              duration: 500ms
+      - flicker:
+      - flicker:
+          name: Flicker Effect With Custom Values1
+          alpha: 95%
+          intensity: 1.5%
+      - addressable_flicker:
+      - addressable_flicker:
+          name: Flicker Effect With Custom Values2
+          update_interval: 16ms
+          intensity: 5%
+      - addressable_rainbow:
+      - addressable_rainbow:
+          name: Rainbow Effect Full
+          speed: 10
+          width: 8
+
+      - addressable_rainbow:
+          name: Rainbow Effect Half
+          speed: 5
+          width: 4
+      - addressable_color_wipe:
+      - addressable_color_wipe:
+          name: Color Wipe Effect With Custom Values
+          colors:
+            - red: 100%
+              green: 100%
+              blue: 100%
+              num_leds: 1
+            - red: 0%
+              green: 0%
+              blue: 0%
+              num_leds: 1
+          add_led_interval: 100ms
+          reverse: false
+      - addressable_scan:
+      - addressable_scan:
+          name: Scan Effect With Custom Values
+          move_interval: 100ms
+          scan_width: 1
+      - addressable_twinkle:
+      - addressable_twinkle:
+          name: Twinkle Effect With Custom Values
+          twinkle_probability: 5%
+          progress_interval: 4ms
+      - addressable_fireworks:
+      - addressable_fireworks:
+          name: Fireworks Effect With Custom Values
+          update_interval: 32ms
+          spark_probability: 10%
+          use_random_color: false
+          fade_out_rate: 120
+
+      - automation:
+          name: Custom Automation Effect
+          sequence:
+          - light.addressable_set:
+              id: ${friendly_name}_light
+              red: 0%
+              green: 100%
+              blue: 0%
+          - delay: 100ms
+          - light.addressable_set:
+              id: ${friendly_name}_light
+              range_from: 0
+              range_to: 8
+              red: 100%
+              green: 0%
+              blue: 0%

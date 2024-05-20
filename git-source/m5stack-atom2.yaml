@@ -1,0 +1,209 @@
+substitutions:
+  device_name: m5stack-atom2
+  friendly_name: atom2
+
+  # ---Jarvis---
+  # ------------------
+  #   Pin-Belegung / Switch     
+  #   GND über 19   kabel schwarz/black
+  # ------------------
+#  statusled_01red_pin: GPIO26   # a01 26Relais1 kabel lila/purple
+#  statusled_02green_pin: GPIO19 # a01 19Relais2 kabel grau/grey
+#  statusled_03blue_pin: GPIO18  # a01 18Relais3 kabel weiss/white   = blue_led_light
+  
+#  statusled_04red_pin: GPIO4    # at1 Jarvis on 04Relais4 kabel blau/blue
+#  statusled_05green_pin: GPIO2  # at1 Jarvis off 02Relais5 Kabel grün/green
+
+#  pir_pin: GPIO23               # a01 Bewegung
+#  dht_pin: GPIO25               # b07 b08 dht11 pin 25 normal motion ^^ pin 23
+#  led_pin: GPIO39               # at1 button Taster1 27Relais0
+  rgb_pin: GPIO27               # at1_light 1x WS2812B pin: 27
+
+esphome:
+  name: ${device_name}
+  friendly_name: ${friendly_name}
+  platform: ESP32
+  board: m5stack-core-esp32
+    # Automation turning on the blue status LED once T1 is booted up
+  on_boot:
+    priority: -10
+    then:
+      - light.turn_on: status_led
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  # password: !secret esphome_secret
+  encryption:
+    key: "0Dbns3KgPwe/xKvh+TiwC3InUSi7XQ+XmRf8u56mG2A="
+
+ota:
+  # password: !secret esphome_secret
+  password: "d1b3b13d8c0f8aa0974e42efd2fa2f45"
+
+wifi:
+  ssid: 6wlan # !secret wifi_ssid
+  password: !secret wifi_password
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: Fallback ${device_name}
+    password: "nO77Vz2rHIL7"
+
+## Device-specific
+
+light:
+  - platform: fastled_clockless
+    chipset: WS2812B
+    pin: ${rgb_pin}                                 # GPIO14
+    num_leds: 1                                     # 8 - 60
+    rgb_order: GRB
+    name: "${friendly_name} Light"  #FastLED NEOPIXEL Light
+    id: status_led
+    default_transition_length: 1s
+    restore_mode: ALWAYS_OFF
+    effects:
+      - random:
+      - random:
+          name: Random Effect With Custom Values
+          transition_length: 2s
+          update_interval: 3s
+      - strobe:
+      - strobe:
+          name: Strobe Effect With Custom Values
+          colors:
+            - state: true
+              brightness: 100%
+              red: 100%
+              green: 00%
+              blue: 0%
+              duration: 500ms
+            - state: false
+              duration: 250ms
+            - state: true
+              brightness: 100%
+              red: 0%
+              green: 100%
+              blue: 0%
+              duration: 500ms
+      - flicker:
+      - flicker:
+          name: Flicker Effect With Custom Values1
+          alpha: 95%
+          intensity: 1.5%
+      - addressable_flicker:
+      - addressable_flicker:
+          name: Flicker Effect With Custom Values2
+          update_interval: 16ms
+          intensity: 5%
+      - addressable_rainbow:
+      - addressable_rainbow:
+          name: Rainbow Effect Full
+          speed: 10
+          width: 8
+
+      - addressable_rainbow:
+          name: Rainbow Effect Half
+          speed: 5
+          width: 4
+      - addressable_color_wipe:
+      - addressable_color_wipe:
+          name: Color Wipe Effect With Custom Values
+          colors:
+            - red: 100%
+              green: 100%
+              blue: 100%
+              num_leds: 1
+            - red: 0%
+              green: 0%
+              blue: 0%
+              num_leds: 1
+          add_led_interval: 100ms
+          reverse: false
+      - addressable_scan:
+      - addressable_scan:
+          name: Scan Effect With Custom Values
+          move_interval: 100ms
+          scan_width: 1
+      - addressable_twinkle:
+      - addressable_twinkle:
+          name: Twinkle Effect With Custom Values
+          twinkle_probability: 5%
+          progress_interval: 4ms
+      - addressable_fireworks:
+      - addressable_fireworks:
+          name: Fireworks Effect With Custom Values
+          update_interval: 32ms
+          spark_probability: 10%
+          use_random_color: false
+          fade_out_rate: 120
+
+      - automation:
+          name: Custom Automation Effect
+          sequence:
+          - light.addressable_set:
+              id: status_led
+              red: 0%
+              green: 100%
+              blue: 0%
+          - delay: 100ms
+          - light.addressable_set:
+              id: status_led
+              range_from: 0
+              range_to: 1
+              red: 100%
+              green: 0%
+              blue: 0%
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: 39
+      inverted: true
+    name: ${friendly_name} Button
+    on_press:
+      then:
+        - light.toggle: status_led
+
+  - platform: status
+    name: "${friendly_name} Status"
+
+sensor:
+  - platform: wifi_signal
+    name: "${friendly_name} WiFi Signal"
+    id: ${friendly_name}_wifisignal
+    update_interval: 4s     #60s
+    filters:
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 15
+          send_first_at: 1
+
+  - platform: uptime
+    name: "${friendly_name} Uptime Sensor" 
+    id: ${friendly_name}_uptimesensor
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      id: ${friendly_name}_ipaddress
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      id: ${friendly_name}_connectedssid
+
+switch:
+  - platform: restart
+    name: "${friendly_name} Restart"
+    id: ${friendly_name}_restart   
+
+  - platform: shutdown
+    name: "${friendly_name} Shutdown"  
+    id: ${friendly_name}_shutdown
+
+time:
+  - platform: sntp
+    id: esphome_time
+    servers:
+      - 0.pool.ntp.org
