@@ -1,0 +1,384 @@
+- id: '1701201905503'
+  alias: Automatisierung Flur1A
+  description: motion flur -> fastlightA
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32a05_a05_bewegung
+      light_target:
+        entity_id: light.az32a05_a05_light_blue_led
+      no_motion_wait: 11
+- id: '1712773024358'
+  alias: Automatisierung Flur2B
+  description: motion flur -> fastlightB
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32b05_b05_bewegung
+      light_target:
+        entity_id: light.az32b05_b05_light_blue_led
+      no_motion_wait: 11
+- id: '1713639276306'
+  alias: Automatisierung Kueche
+  description: motion kueche -> fastlightA01
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32a01_a01_bewegung
+      light_target:
+        entity_id:
+        - light.az32a01_a01_light_blue_led
+      no_motion_wait: 11
+- id: '1713647746527'
+  alias: Automatisierung Bad
+  description: motion kueche -> fastlightA01
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32a02_a02_bewegung
+      light_target:
+        entity_id: light.az32a02_a02_light_blue_led
+      no_motion_wait: 11
+- id: '1713704786412'
+  alias: Automatisierung Sleep
+  description: motion sleep -> fastlightA03
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32a03_a03_bewegung
+      light_target:
+        entity_id: light.az32a03_a03_light_blue_led
+      no_motion_wait: 11
+- id: '1713709877432'
+  alias: Automatisierung Wohnzimmer
+  description: motion living -> fastlightA04
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32a04_a04_bewegung
+      light_target:
+        entity_id: light.az32a04_a04_light_blue_led
+      no_motion_wait: 11
+- id: '1714585053578'
+  alias: Automatisierung Dachboden
+  description: motion living -> fastlightb07blue
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32b07_b07_bewegung
+      light_target:
+        entity_id:
+        - light.az32b07_b07_light_blue_led
+      no_motion_wait: 11
+- id: '1714895608470'
+  alias: Automatisierung Homelab
+  description: motion kueche -> fastlightA00
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32a00_a00_bewegung
+      light_target:
+        entity_id: light.az32a00_a00_light_blue_led
+      no_motion_wait: 11
+- id: '1714915763798'
+  alias: Automatisierung Balkon
+  description: motion balkon -> fastlightA06
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32a06_a06_bewegung
+      light_target:
+        entity_id: light.az32a06_a06_light_blue_led
+      no_motion_wait: 11
+- id: '1714919364234'
+  alias: Automatisierung Keller
+  description: motion living -> fastlightb07blue
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32b08_b08_bewegung
+      light_target:
+        entity_id: light.az32b08_b08_light_blue_led
+      no_motion_wait: 11
+- id: '1714929421492'
+  alias: Automatisierung Garage
+  description: motion garage -> fastlightb09blue
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32b09_b09_bewegung
+      light_target:
+        entity_id: light.az32b09_b09_light_blue_led
+      no_motion_wait: 11
+- id: '1714930070856'
+  alias: Automatisierung Buero
+  description: motion Büro -> fastlightb10blue
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32b10_b10_bewegung
+      light_target:
+        entity_id: light.az32b10_b10_light_blue_led
+      no_motion_wait: 11
+- id: '1715021096360'
+  alias: Automatisierung Werkstatt1
+  description: motion Werkstatt1 -> fastlight_c01blue
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.az32c01_c01_bewegung
+      light_target:
+        entity_id: light.az32c01_c01_light_blue_led
+      no_motion_wait: 11
+- id: '1715174710562'
+  alias: Automatisierung Party Mäuschen
+  description: alles An
+  trigger:
+  - platform: device
+    type: changed_states
+    device_id: 036339b3c71a7cc7c5f28c1d897266ec
+    entity_id: 40bf33fc626ed7d6b44beac323d4d21b
+    domain: switch
+  condition:
+  - condition: state
+    entity_id: scene.szene_party_mauschen_protokoll
+    attribute: id
+    state: ''
+  action:
+  - type: turn_on
+    device_id: 036339b3c71a7cc7c5f28c1d897266ec
+    entity_id: 27ce1c2d291adc630b785e0a148edff2
+    domain: light
+    brightness_pct: 100
+    flash: short
+  - service: light.turn_on
+    metadata: {}
+    data:
+      effect: Scan
+    target:
+      entity_id:
+      - light.az32a00_a00_light
+      - light.az32a01_a01_light
+      - light.az32a02_a02_light
+      - light.az32a03_a03_light
+      - light.az32a04_a04_light
+      - light.az32a05_a05_light
+      - light.az32a06_a06_light
+      - light.az32b05_b05_light
+      - light.az32b07_b07_light
+      - light.az32b08_b08_light
+      - light.az32b09_b09_light
+      - light.az32b10_b10_light
+      - light.az32c01_c01_light
+      - light.az32c02_c02_light
+      - light.az32c03_c03_light
+      - light.az32c04_c04_light
+      - light.az32c05_c05_light
+  mode: single
+- id: '1715175184210'
+  alias: Automatisierung Alles Aus
+  description: alles An
+  trigger:
+  - platform: device
+    type: changed_states
+    device_id: 036339b3c71a7cc7c5f28c1d897266ec
+    entity_id: 40bf33fc626ed7d6b44beac323d4d21b
+    domain: switch
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 036339b3c71a7cc7c5f28c1d897266ec
+    entity_id: 27ce1c2d291adc630b785e0a148edff2
+    domain: light
+  - service: light.turn_off
+    target:
+      entity_id:
+      - light.az32a00_a00_light
+      - light.az32a01_a01_light
+      - light.az32a02_a02_light
+      - light.az32a03_a03_light
+      - light.az32a04_a04_light
+      - light.az32a05_a05_light
+      - light.az32a06_a06_light
+      - light.az32b05_b05_light
+      - light.az32b07_b07_light
+      - light.az32b08_b08_light
+      - light.az32b09_b09_light
+      - light.az32b10_b10_light
+      - light.az32c01_c01_light
+      - light.az32c02_c02_light
+      - light.az32c03_c03_light
+      - light.az32c04_c04_light
+      - light.az32c05_c05_light
+    data: {}
+  mode: single
+- id: '1715176340321'
+  alias: Automatisierung Alles An
+  description: alles An
+  trigger:
+  - platform: device
+    type: changed_states
+    device_id: 036339b3c71a7cc7c5f28c1d897266ec
+    entity_id: 40bf33fc626ed7d6b44beac323d4d21b
+    domain: switch
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 036339b3c71a7cc7c5f28c1d897266ec
+    entity_id: 27ce1c2d291adc630b785e0a148edff2
+    domain: light
+    brightness_pct: 100
+    flash: short
+  - type: turn_on
+    device_id: c6762c9afad6d82aaf923b0524675b2f
+    entity_id: 7ab2b1d23b8f54844d007d4fa2957d3e
+    domain: light
+  - type: turn_on
+    device_id: a5a4a0a6fbe28be0e55c01a567cdf30a
+    entity_id: f628d215f00e4659be23cd22123144e5
+    domain: light
+  - type: turn_on
+    device_id: c82c5823c50c0d05ba3bddde6e90ee89
+    entity_id: 3d6716f70087f8e98f810846ff58e2db
+    domain: light
+  - type: turn_on
+    device_id: af0ed91259b32f4bbd43806b69d36094
+    entity_id: 6a2f180e703531646d53fd60d46c5219
+    domain: light
+  - type: turn_on
+    device_id: b4687ff7170807882a136c37ea49b30e
+    entity_id: 27719f8adb6b92c961ac942383ae9e61
+    domain: light
+  - type: turn_on
+    device_id: 0093939cc243458ed284ececf30ba83a
+    entity_id: a8a54a24d934e0ded18c43f9bd0e4763
+    domain: light
+  - type: turn_on
+    device_id: a1d0a29f51e7025257f03118348d771a
+    entity_id: d85fd4275cee280dfc8130ff036bf929
+    domain: light
+  - type: turn_on
+    device_id: f4b601dcca3647bf2b70301dc3d6380a
+    entity_id: e7d9ed02aba53a02cef9fda82e47f727
+    domain: light
+  - type: turn_on
+    device_id: 3c5255cac776b079679471b4d53a6183
+    entity_id: cdbf43b9094dd31e252122f7ace4feea
+    domain: light
+  - type: turn_on
+    device_id: 0c88933e1241d70235fc64ccaafd7317
+    entity_id: 86d6b117511236b5c9fa1c9a9bb718d6
+    domain: light
+  - type: turn_on
+    device_id: abfa79fbf287197636ed8a07b891c24f
+    entity_id: 3059fa619725ea12509627fc1a10892b
+    domain: light
+  - type: turn_on
+    device_id: 7e6def21599d9620354ecd7039b3b093
+    entity_id: 80ab8feb08f22fedff01bd454cfa9865
+    domain: light
+  - type: turn_on
+    device_id: 698b14b7c60615fa988e12faefabc325
+    entity_id: cc0740184e762af7afe1659a4e858b26
+    domain: light
+  - type: turn_on
+    device_id: 0662420a82ee64b6d5d00234b69283c2
+    entity_id: 66190311313128988ce200b8d4a0d3cc
+    domain: light
+  - type: turn_on
+    device_id: 37ac404346a97be9c6e47561640664a7
+    entity_id: 1d605ca256575f813fde2acd0d4ac852
+    domain: light
+  - type: turn_on
+    device_id: 57714ae0990bed356a1fb7a685b5b33a
+    entity_id: ad4bc384e1890180029502916d7315c1
+    domain: light
+  mode: single
+- id: '1715176502310'
+  alias: Automatisierung House Party Protokoll
+  description: House Party Rainbow Effekt
+  trigger:
+  - platform: device
+    type: changed_states
+    device_id: 036339b3c71a7cc7c5f28c1d897266ec
+    entity_id: 40bf33fc626ed7d6b44beac323d4d21b
+    domain: switch
+  condition:
+  - condition: state
+    entity_id: scene.szene_house_party_protokoll
+    attribute: id
+    state: An
+  action:
+  - type: turn_on
+    device_id: 036339b3c71a7cc7c5f28c1d897266ec
+    entity_id: 27ce1c2d291adc630b785e0a148edff2
+    domain: light
+    brightness_pct: 100
+    flash: short
+  - service: light.turn_on
+    metadata: {}
+    data:
+      effect: Rainbow
+    target:
+      entity_id:
+      - light.az32a00_a00_light
+      - light.az32a01_a01_light
+      - light.az32a02_a02_light
+      - light.az32a03_a03_light
+      - light.az32a04_a04_light
+      - light.az32a05_a05_light
+      - light.az32a06_a06_light
+      - light.az32b05_b05_light
+      - light.az32b07_b07_light
+      - light.az32b08_b08_light
+      - light.az32b09_b09_light
+      - light.az32b10_b10_light
+      - light.az32c01_c01_light
+      - light.az32c02_c02_light
+      - light.az32c03_c03_light
+      - light.az32c04_c04_light
+      - light.az32c05_c05_light
+      label_id: hauslabor
+  mode: single
+- id: '1715369398395'
+  alias: Automatisierung Red Light An
+  description: Atom1 Atom2 Red Light 20%
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.m5stack_atom_echo_30d6dc_button
+    from: 'on'
+  condition: []
+  action:
+  - service: light.turn_on
+    metadata: {}
+    data:
+      brightness_pct: 20
+      rgb_color:
+      - 255
+      - 0
+      - 0
+    target:
+      entity_id:
+      - light.m5stack_atom1_atom1_light
+      - light.m5stack_atom2_atom2_light
+  mode: single
+- id: '1715374921308'
+  alias: Automatisierung Red Light Aus
+  description: Atom1 Atom2 Echo1 Red Light 0%
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: 036339b3c71a7cc7c5f28c1d897266ec
+    entity_id: 40bf33fc626ed7d6b44beac323d4d21b
+    domain: switch
+  condition: []
+  action:
+  - service: light.turn_off
+    target:
+      entity_id:
+      - light.m5stack_atom1_atom1_light
+      - light.m5stack_atom2_atom2_light
+      - light.m5stack_atom_echo_30d6dc_m5stack_atom_echo_30d6dc
+    data: {}
+  mode: single

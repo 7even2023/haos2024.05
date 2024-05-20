@@ -1,0 +1,98 @@
+esphome:
+  name: az32d08
+  friendly_name: az32d08
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "CUuhpB5JCmuhRdVGfALGXpM5KF4dFJtpTiQU6tfVfbE="
+
+ota:
+  password: "2d7c8f3c0cd37794d139067c0222208c"
+
+wifi:
+  ssid: 7wlan # !secret wifi_ssid
+  password: !secret wifi_password
+#  power_save_mode: none
+#  reboot_timeout: 0s
+#  domain: ".local"       #  domain  .fritz.box 
+#  output_power: 20dB
+#  fast_connect: true
+
+#  manual_ip:
+#    static_ip: 192.168.1.173 # 3EG5-Garten (A) = Bereich ,  d8
+#    gateway: 192.168.1.1
+#    subnet: 255.255.255.0 # subnet2 test 255.255.0.0
+#    dns1: 192.168.1.1
+#    dns2: 8.8.8.8
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Az32D08 Fallback Hotspot"
+    password: "GktKX9GylPr8"
+
+captive_portal:
+
+i2c:
+  sda: 21
+  scl: 22
+  scan: true
+  id: bus_a
+
+# MQ2 Smoke Gas Sensor
+sensor:
+  - platform: wifi_signal
+    name: "D08 WiFi Signal"
+    update_interval: 120s     #60s  from 4s car real time
+    filters:
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 15
+          send_first_at: 1
+
+
+  - platform: mpu6050
+    address: 0x68
+    i2c_id: bus_a
+    accel_x:
+      name: "MPU6050 Accel X"
+    accel_y:
+      name: "MPU6050 Accel Y"
+    accel_z:
+      name: "MPU6050 Accel z"
+    gyro_x:
+      name: "MPU6050 Gyro X"
+    gyro_y:
+      name: "MPU6050 Gyro Y"
+    gyro_z:
+      name: "MPU6050 Gyro z"
+    temperature:
+      name: "MPU6050 Temperature"
+    update_interval: 60s #  from 1s  real time car  to  ... 10s 60s def
+    id: d08_mpu6050
+
+switch:
+  - platform: restart
+    name: "D08 Restart"
+
+  - platform: shutdown
+    name: "D08 Shutdown"
+
+binary_sensor:
+  - platform: status
+    name: "D08 Status"
+
+time:
+  - platform: sntp
+    id: esphome_time
+    servers:
+      - 0.pool.ntp.org
+    

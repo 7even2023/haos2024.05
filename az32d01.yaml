@@ -1,0 +1,447 @@
+substitutions:
+  devicename: az32d01
+  friendly_name: d01
+  # ------------------
+  #   Pin-Belegung / Switch     # GND über 19   kabel schwarz/black
+  # ------------------
+ # statusled_01red_pin: GPIO26   # a01 26Relais1 kabel lila/purple
+ # statusled_02green_pin: GPIO19 # a01 19Relais2 kabel grau/grey
+ #  statusled_03blue_pin: GPIO18  # a01 18Relais3 kabel weiss/white
+  
+ # statusled_04red_pin: GPIO4    # a01 04Relais4 kabel blau/blue
+ # statusled_05green_pin: GPIO2  # a01 02Relais5 Kabel grün/green
+
+#  pir_pin: GPIO25               # a01 Bewegung
+#  dht_pin: GPIO23               # a06 has bme and dht11 after b07 b08 is dht11 only pin 25 normal motion ^^ pin 23
+#  led_pin: GPIO23               # a01 27Relais0
+#  rgb_pin: GPIO14               # a01_light 8x WS2812B
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/trombik/esphome-component-ds1302
+    components:
+      - ds1302
+
+esphome:
+  name: az32d01
+  friendly_name: d01
+  on_boot:
+    - binary_sensor.template.publish:
+        id: timer_sensor
+        state: False
+    - binary_sensor.template.publish:
+        id: script_running_sensor
+        state: False
+    - sensor.template.publish:
+        id: countdown_count
+        state: 10
+#    then:
+      # Systemzeit mit RTC syncen
+#      ds1302.read_time:
+
+
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+    version: 2.0.5
+    platform_version: 5.2.0
+
+# Enable logging
+logger:
+# level: none # default
+# level: error
+# level: warn
+# level: info
+#  level: debug
+# level: verbose
+# level: very_verbose
+
+debug:
+#   update_interval: 5s
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "xhRVNVSLLr/6nQSwc7Rrfg+0Mrl45YWxLIRPM7M2+bo="
+  reboot_timeout: 0s
+
+ota:
+  password: "1f0f42b9902f9fd737c580dde09fc049"
+
+wifi:
+  ssid: 6wlan # !secret wifi_ssid
+  password: !secret wifi_password
+#  power_save_mode: none
+#  reboot_timeout: 0s
+#  domain: ".local"       #  domain  .fritz.box 
+#  output_power: 20dB
+#  fast_connect: true
+
+#  manual_ip:
+#    static_ip: 192.168.1.166 # 3EG5-Garten (A) = Bereich ,  d1 unter test 1 lcd1602 time+ date over ha
+#    gateway: 192.168.1.1
+#    subnet: 255.255.255.0 # subnet2 test 255.255.0.0
+#    dns1: 192.168.1.1
+#    dns2: 8.8.8.8
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Az32D01 Fallback Hotspot"
+    password: "WGExRolIBdwu"
+
+captive_portal: # fallback webseite netzwerkauswahl
+#####################################################################################
+web_server:
+  port: 80
+  version: 2
+  local: true
+  auth:
+    username: d01
+    password: control
+
+#i2c: #(0x27,16,2) lcd1602 PCF8574T, 1=GND, 2=+5V, 3=SDA(orange)auf PIN13, 4=SCL(gelb)auf PIN14  (!PIN12 strapping pin not used)
+#######################################################################
+# I2C SETUP
+i2c:
+  - id: bus_a
+    sda: 21
+    scl: 22
+    scan: true
+    frequency: 400kHz # fix warnings
+#####################################################################################
+#time:
+time:
+  - platform: ds1302
+    id: ds1302_time
+    #i2c_id: bus_a
+    cs_pin: GPIO25
+    dio_pin: GPIO26
+    clk_pin: GPIO27
+    update_interval: never
+
+  - platform: sntp
+    id: sntp_time
+    on_time_sync:
+      then:
+        ds1302.write_time:
+      # - logger.log: "Synchronized system clock"
+         #id: ds1302_time
+
+##################################################################################
+#Abfrage der Uhrzeit über die RTC
+#time:
+#  - platform: ds1302
+#    id: time_source
+#    i2c_id: bus_a
+#    update_interval: never
+#parallel dauerhaft versuchen über wifi die Zeit zu syncen
+  - platform: homeassistant
+    id: my_time
+    on_time_sync:
+      then:
+        #update der RTC
+        ds1302.write_time:
+
+  - platform: homeassistant
+    id: my_time2
+    on_time:
+      - seconds: /10
+        then:
+        - switch.toggle: led_id
+#####################################################################################
+interval:
+  - interval: 1min
+    then:
+      - lambda: |-          
+          char str[30];
+          time_t currTime = id(ds1302_time).now().timestamp;
+          strftime(str, sizeof(str), "%Y-%m-%d %H:%M", localtime(&currTime));
+          ESP_LOGD("custom", "curTime: %s", str);
+      - delay: 20s
+
+#.is_dst
+#Is daylight savings time false, true
+
+#.timestamp
+#auto time = id(sntp_time).now();
+#Alternatively, you can use .utcnow() to get the current UTC time.
+
+binary_sensor:
+  - platform: template
+    name: "Timer Sensor"
+    id: timer_sensor
+
+  - platform: template
+    name: "Script running"
+    id: script_running_sensor
+
+  - platform: template
+    name: "PIN23LED-ROT hell"
+    lambda: |-
+          if (id(source_sensor2).state > 70) {
+            return true;
+          } else {
+            return false;
+          }
+
+
+button:
+  # Einfaches warten mit DELAY
+  - platform: template
+    name: Timer 1
+    id: t1_button
+    on_press:
+      - binary_sensor.template.publish:
+          id: timer_sensor
+          state: True
+
+      - delay: 2s
+
+      - binary_sensor.template.publish:
+          id: timer_sensor
+          state: False
+
+  # Timer Script um zeitweise andere Aktionen zu sperren
+  - platform: template
+    name: Timer Script
+    id: t3_button
+    on_press:
+      - script.execute: blocking_timer
+
+  - platform: template
+    name: Light Toggle button
+    on_press: 
+      then:
+        - if: 
+            condition:
+              not:
+                - script.is_running: blocking_timer
+            then:   
+              - light.toggle: demo_light
+
+
+
+
+sensor:
+  - platform: template
+    name: "Countdown"
+    id: countdown_count  
+  # Fotowiderstand (siehe Schaltplan rechts 2.ac am relais):
+  -  platform: adc
+     id: source_sensor2
+     name: "d01 Foto Sensor33"
+     pin: GPIO33  #33 orginal
+     update_interval: 10s # 60s
+     filters:
+        - offset: 0.0
+        - multiply: 1.0  #3.3
+        - calibrate_linear:
+          - 0.0700 -> -10.00      
+          - 0.5 -> 60.00           
+          - 1.045 -> 90.69       
+     unit_of_measurement: "%"
+
+  - platform: template
+    id: time_second
+    name: Time second   
+    # Seconds after the minute [0-60] (generally [0-59], extra range is to accommodate leap seconds.)
+    lambda: |- 
+      char str[30];
+      auto time = id(ds1302_time).now();   
+      return time.second;
+
+  - platform: template
+    id: time_minutes
+    name: Time minute   
+    # Minutes after the hour [0-59]
+    lambda: |- 
+      char str[30];
+      auto time = id(ds1302_time).now();   
+      return time.minute; 
+
+  - platform: template
+    id: time_hour
+    name: Time hour   
+    # Hours since midnight [0-23]
+    lambda: |- 
+      char str[30];
+      auto time = id(ds1302_time).now();   
+      return time.hour; 
+
+  - platform: template
+    id: time_year
+    name: Time year   
+    # Year since 0 A.C. [1970-∞[2018
+    lambda: |- 
+      char str[30];
+      auto time = id(ds1302_time).now();   
+      return time.year; 
+
+  - platform: template
+    id: time_month
+    name: Time month   
+    # Month, january=1 	[1-12]	
+    lambda: |- 
+      char str[30];
+      auto time = id(ds1302_time).now();   
+      return time.month; 
+
+  - platform: template
+    id: time_dayofweek
+    name: Time dayofweek  
+    # Day of the week, sunday=1 [1-7] 7 (saturday)
+    lambda: |- 
+      char str[30];
+      auto time = id(ds1302_time).now();   
+      return time.day_of_week; 
+
+  - platform: template
+    id: time_dayofmonth
+    name: Time dayofmonth  
+     # Day of the month [1-31]
+    lambda: |- 
+      char str[30];
+      auto time = id(ds1302_time).now();   
+      return time.day_of_month; 
+
+  - platform: template
+    id: time_dayofyear
+    name: Time dayofyear
+     # Day of the year [1-365]
+    lambda: |- 
+      char str[30];
+      auto time = id(ds1302_time).now();   
+      return time.day_of_year; 
+
+  - platform: wifi_signal
+    name: "${friendly_name} WiFi Signal"
+    id: ${friendly_name}_wifisignal
+    update_interval: 4s     #60s
+    filters:
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 15
+          send_first_at: 1
+
+  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
+    name: "WiFi Signal dB"
+    id: wifi_signal_db
+    update_interval: 120s
+    entity_category: "diagnostic"
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: wifi_signal_db
+    name: "WiFi Signal Percent"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "Signal %"
+    entity_category: "diagnostic"
+
+  - platform: uptime
+    name: "${friendly_name} Uptime Sensor" 
+    id: ${friendly_name}_uptimesensor
+
+display:
+  - platform: lcd_pcf8574
+    dimensions: 16x2
+    address: 0x27
+    update_interval: 3s  # 1s - 10s
+    id: lcd
+    # interval 500ms  # it.strftime("%H.%M", id(ds1302_time).now()); else 
+    lambda: |-
+      static int i = 0;
+      i++;
+      if ((i % 2) == 0) {
+        it.strftime(0, 0, "Time  %H:%M:%S", id(ds1302_time).now());
+        it.strftime(0, 1, "Date  %d.%m.%Y", id(ds1302_time).now()); 
+      } else {
+        it.strftime(0, 0, "Time  %H:%M.%S", id(ds1302_time).now());
+        it.strftime(0, 1, "Date  %d.%m.%Y", id(ds1302_time).now()); 
+      }
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+      id: ${friendly_name}_ipaddress
+    ssid:
+      name: "${friendly_name} Connected SSID"
+      id: ${friendly_name}_connectedssid
+
+  - platform: template
+    id: time_utctime
+    name: Time utctime 
+    # Alternatively, you can use .utcnow() to get the current UTC time.
+    lambda: | 
+      auto time_text = id(ds1302_time).now().strftime("%Y-%m-%d %H:%M");
+      return {time_text};
+    update_interval: 60s
+
+  - platform: template
+    id: time_mytime1
+    name: Time mytime1
+    # Alternatively, you can use .utcnow() to get the current UTC time. %Y-%m-%d %H:%M:%S
+    lambda: | 
+      auto time_text = id(ds1302_time).now().strftime("%d.%m.%Y %H:%M:%S");
+      return {time_text};
+    update_interval: 60s
+
+  - platform: template
+    id: time_mytime2
+    name: Time mytime2
+    # Alternatively, you can use .utcnow() to get the current UTC time. %Y-%m-%d %H:%M:%S
+    lambda: | 
+      auto time_text = id(ds1302_time).now().strftime("%H:%M:%S %d.%m.%Y");
+      return {time_text};
+    update_interval: 1s
+
+switch:
+  - platform: restart
+    name: "${friendly_name} Restart"
+    id: ${friendly_name}_restart   
+
+  - platform: gpio
+    pin: GPIO23
+    id: led_id
+    name: "10s Relais"
+
+light:
+  - platform: status_led
+    name: "LED blocked by script"
+    id: demo_light
+    pin: GPIO32
+
+script:
+  - id: blocking_timer
+    mode: restart
+    then:
+      - binary_sensor.template.publish:
+          id: script_running_sensor
+          state: True
+
+      - delay: 10s
+
+      - binary_sensor.template.publish:
+          id: script_running_sensor
+          state: False
+
+  - id: countdown
+    mode: restart
+    parameters:
+      count: int    
+    then:
+      - lambda: id(countdown_count).publish_state(count);
+          
+      - repeat:
+          count: !lambda return count;
+          then:
+            - delay: 1s
+            - lambda: id(countdown_count).publish_state(id(countdown_count).state - 1);
+
+
+
+
+
+    

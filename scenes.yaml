@@ -1,0 +1,3066 @@
+- id: '1700848911252'
+  name: Szene Aus
+  entities:
+    light.az32a00_a00_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: a00 a00 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32a00_a00_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: a00 a00 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32a00_a00_26relais1:
+      friendly_name: a00 a00 26Relais1
+      state: 'off'
+    switch.az32a00_a00_19relais2:
+      friendly_name: a00 a00 19Relais2
+      state: 'on'
+    switch.az32a00_a00_04relais4:
+      friendly_name: a00 a00 04Relais4
+      state: 'off'
+    switch.az32a00_a00_02relais5:
+      friendly_name: a00 a00 02Relais5
+      state: 'off'
+    switch.az32a00_a00_27relais0:
+      friendly_name: a00 a00 27Relais0
+      state: 'off'
+    switch.az32a01_a01_26relais1:
+      friendly_name: a01 a01 26Relais1
+      state: 'off'
+    switch.az32a01_a01_19relais2:
+      friendly_name: a01 a01 19Relais2
+      state: 'off'
+    switch.az32a01_a01_04relais4:
+      friendly_name: a01 a01 04Relais4
+      state: 'off'
+    switch.az32a01_a01_02relais5:
+      friendly_name: a01 a01 02Relais5
+      state: 'off'
+    light.az32a01_a01_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: a01 a01 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32a01_a01_27relais0:
+      friendly_name: a01 a01 27Relais0
+      state: 'off'
+    light.az32a01_a01_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: a01 a01 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32a02_a02_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: a02 a02 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32a02_a02_26relais1:
+      friendly_name: a02 a02 26Relais1
+      state: 'off'
+    switch.az32a02_a02_19relais2:
+      friendly_name: a02 a02 19Relais2
+      state: 'on'
+    switch.az32a02_a02_04relais4:
+      friendly_name: a02 a02 04Relais4
+      state: 'off'
+    switch.az32a02_a02_02relais5:
+      friendly_name: a02 a02 02Relais5
+      state: 'off'
+    switch.az32a02_a02_27relais0:
+      friendly_name: a02 a02 27Relais0
+      state: 'off'
+    light.az32a02_a02_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: a02 a02 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32a03_a03_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: a03 a03 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32a03_a03_26relais1:
+      friendly_name: a03 a03 26Relais1
+      state: 'off'
+    switch.az32a03_a03_19relais2:
+      friendly_name: a03 a03 19Relais2
+      state: 'off'
+    switch.az32a03_a03_04relais4:
+      friendly_name: a03 a03 04Relais4
+      state: 'off'
+    switch.az32a03_a03_02relais5:
+      friendly_name: a03 a03 02Relais5
+      state: 'off'
+    switch.az32a03_a03_27relais0:
+      friendly_name: a03 a03 27Relais0
+      state: 'off'
+    light.az32a03_a03_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: a03 a03 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32a04_a04_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: a04 a04 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32a04_a04_26relais1:
+      friendly_name: a04 a04 26Relais1
+      state: 'off'
+    switch.az32a04_a04_19relais2:
+      friendly_name: a04 a04 19Relais2
+      state: 'off'
+    switch.az32a04_a04_04relais4:
+      friendly_name: a04 a04 04Relais4
+      state: 'off'
+    switch.az32a04_a04_02relais5:
+      friendly_name: a04 a04 02Relais5
+      state: 'off'
+    switch.az32a04_a04_27relais0:
+      friendly_name: a04 a04 27Relais0
+      state: 'off'
+    light.az32a04_a04_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: a04 a04 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32a05_a05_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: a05 a05 Light
+      supported_features: 44
+      state: 'off'
+    light.az32a05_a05_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: a05 a05 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    switch.az32a05_a05_26relais1:
+      friendly_name: a05 a05 26Relais1
+      state: 'off'
+    switch.az32a05_a05_19relais2:
+      friendly_name: a05 a05 19Relais2
+      state: 'off'
+    switch.az32a05_a05_04relais4:
+      friendly_name: a05 a05 04Relais4
+      state: 'off'
+    switch.az32a05_a05_02relais5:
+      friendly_name: a05 a05 02Relais5
+      state: 'on'
+    switch.az32a05_a05_27relais0:
+      friendly_name: a05 a05 27Relais0
+      state: 'off'
+    light.az32a06_a06_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: a06 a06 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32a06_a06_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: a06 a06 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32a06_a06_26relais1:
+      friendly_name: a06 a06 26Relais1
+      state: 'off'
+    switch.az32a06_a06_19relais2:
+      friendly_name: a06 a06 19Relais2
+      state: 'off'
+    switch.az32a06_a06_04relais4:
+      friendly_name: a06 a06 04Relais4
+      state: 'off'
+    switch.az32a06_a06_02relais5:
+      friendly_name: a06 a06 02Relais5
+      state: 'on'
+    switch.az32a06_a06_27relais0:
+      friendly_name: a06 a06 27Relais0
+      state: 'off'
+    light.az32b05_b05_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: b05 b05 Light
+      supported_features: 44
+      state: 'off'
+    light.az32b05_b05_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: b05 b05 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    switch.az32b05_b05_26relais1:
+      friendly_name: b05 b05 26Relais1
+      state: 'off'
+    switch.az32b05_b05_19relais2:
+      friendly_name: b05 b05 19Relais2
+      state: 'off'
+    switch.az32b05_b05_04relais4:
+      friendly_name: b05 b05 04Relais4
+      state: 'off'
+    switch.az32b05_b05_02relais5:
+      friendly_name: b05 b05 02Relais5
+      state: 'on'
+    switch.az32b05_b05_27relais0:
+      friendly_name: b05 b05 27Relais0
+      state: 'off'
+    light.az32b07_b07_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: b07 b07 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32b07_b07_26relais1:
+      friendly_name: b07 b07 26Relais1
+      state: 'off'
+    switch.az32b07_b07_19relais2:
+      friendly_name: b07 b07 19Relais2
+      state: 'off'
+    switch.az32b07_b07_04relais4:
+      friendly_name: b07 b07 04Relais4
+      state: 'off'
+    switch.az32b07_b07_02relais5:
+      friendly_name: b07 b07 02Relais5
+      state: 'on'
+    switch.az32b07_b07_27relais0:
+      friendly_name: b07 b07 27Relais0
+      state: 'off'
+    light.az32b07_b07_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: b07 b07 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32b08_b08_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: b08 b08 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32b08_b08_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: b08 b08 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32b08_b08_26relais1:
+      friendly_name: b08 b08 26Relais1
+      state: 'off'
+    switch.az32b08_b08_19relais2:
+      friendly_name: b08 b08 19Relais2
+      state: 'off'
+    switch.az32b08_b08_04relais4:
+      friendly_name: b08 b08 04Relais4
+      state: 'off'
+    switch.az32b08_b08_02relais5:
+      friendly_name: b08 b08 02Relais5
+      state: 'on'
+    switch.az32b08_b08_27relais0:
+      friendly_name: b08 b08 27Relais0
+      state: 'off'
+    light.az32b09_b09_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: b09 b09 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32b09_b09_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: b09 b09 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32b09_b09_26relais1:
+      friendly_name: b09 b09 26Relais1
+      state: 'off'
+    switch.az32b09_b09_19relais2:
+      friendly_name: b09 b09 19Relais2
+      state: 'on'
+    switch.az32b09_b09_04relais4:
+      friendly_name: b09 b09 04Relais4
+      state: 'off'
+    switch.az32b09_b09_02relais5:
+      friendly_name: b09 b09 02Relais5
+      state: 'on'
+    switch.az32b09_b09_27relais0:
+      friendly_name: b09 b09 27Relais0
+      state: 'off'
+    light.az32b10_b10_light_blue_led:
+      supported_color_modes:
+      - brightness
+      friendly_name: b10 b10 Light Blue LED
+      supported_features: 40
+      color_mode:
+      brightness:
+      state: 'off'
+    light.az32b10_b10_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      friendly_name: b10 b10 Light
+      supported_features: 44
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      state: 'off'
+    switch.az32b10_b10_26relais1:
+      friendly_name: b10 b10 26Relais1
+      state: 'off'
+    switch.az32b10_b10_19relais2:
+      friendly_name: b10 b10 19Relais2
+      state: 'off'
+    switch.az32b10_b10_04relais4:
+      friendly_name: b10 b10 04Relais4
+      state: 'off'
+    switch.az32b10_b10_02relais5:
+      friendly_name: b10 b10 02Relais5
+      state: 'on'
+    switch.az32b10_b10_27relais0:
+      friendly_name: b10 b10 27Relais0
+      state: 'off'
+    light.az32c01_c01_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: c01 c01 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32c01_c01_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: c01 c01 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32c01_c01_26relais1:
+      friendly_name: c01 c01 26Relais1
+      state: 'off'
+    switch.az32c01_c01_19relais2:
+      friendly_name: c01 c01 19Relais2
+      state: 'off'
+    switch.az32c01_c01_04relais4:
+      friendly_name: c01 c01 04Relais4
+      state: 'off'
+    switch.az32c01_c01_02relais5:
+      friendly_name: c01 c01 02Relais5
+      state: 'on'
+    switch.az32c01_c01_27relais0:
+      friendly_name: c01 c01 27Relais0
+      state: 'off'
+    light.az32c02_c02_light_blue_led:
+      supported_color_modes:
+      - brightness
+      friendly_name: c02 c02 Light Blue LED
+      supported_features: 40
+      color_mode:
+      brightness:
+      state: 'off'
+    light.az32c02_c02_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      friendly_name: c02 c02 Light
+      supported_features: 44
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      state: 'off'
+    switch.az32c02_c02_26relais1:
+      friendly_name: c02 c02 26Relais1
+      state: 'off'
+    switch.az32c02_c02_19relais2:
+      friendly_name: c02 c02 19Relais2
+      state: 'off'
+    switch.az32c02_c02_04relais4:
+      friendly_name: c02 c02 04Relais4
+      state: 'off'
+    switch.az32c02_c02_02relais5:
+      friendly_name: c02 c02 02Relais5
+      state: 'on'
+    switch.az32c02_c02_27relais0:
+      friendly_name: c02 c02 27Relais0
+      state: 'off'
+    light.az32c03_c03_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: c03 c03 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32c03_c03_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: c03 c03 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32c03_c03_26relais1:
+      friendly_name: c03 c03 26Relais1
+      state: 'off'
+    switch.az32c03_c03_19relais2:
+      friendly_name: c03 c03 19Relais2
+      state: 'off'
+    switch.az32c03_c03_04relais4:
+      friendly_name: c03 c03 04Relais4
+      state: 'off'
+    switch.az32c03_c03_02relais5:
+      friendly_name: c03 c03 02Relais5
+      state: 'on'
+    switch.az32c03_c03_27relais0:
+      friendly_name: c03 c03 27Relais0
+      state: 'off'
+    light.az32c04_c04_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: c04 c04 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32c04_c04_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: c04 c04 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32c04_c04_26relais1:
+      friendly_name: c04 c04 26Relais1
+      state: 'off'
+    switch.az32c04_c04_19relais2:
+      friendly_name: c04 c04 19Relais2
+      state: 'off'
+    switch.az32c04_c04_04relais4:
+      friendly_name: c04 c04 04Relais4
+      state: 'off'
+    switch.az32c04_c04_02relais5:
+      friendly_name: c04 c04 02Relais5
+      state: 'on'
+    switch.az32c04_c04_27relais0:
+      friendly_name: c04 c04 27Relais0
+      state: 'off'
+    light.az32c05_c05_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: c05 c05 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32c05_c05_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect:
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: c05 c05 Light
+      supported_features: 44
+      state: 'off'
+    switch.az32c05_c05_26relais1:
+      friendly_name: c05 c05 26Relais1
+      state: 'off'
+    switch.az32c05_c05_19relais2:
+      friendly_name: c05 c05 19Relais2
+      state: 'off'
+    switch.az32c05_c05_04relais4:
+      friendly_name: c05 c05 04Relais4
+      state: 'off'
+    switch.az32c05_c05_02relais5:
+      friendly_name: c05 c05 02Relais5
+      state: 'on'
+    switch.az32c05_c05_27relais0:
+      friendly_name: c05 c05 27Relais0
+      state: 'off'
+  metadata: {}
+  icon: mdi:alarm-light-off
+- id: '1715097809526'
+  name: House-Party Protokoll
+  entities:
+    binary_sensor.az32c01_c01_bewegung:
+      device_class: motion
+      friendly_name: c01 c01 Bewegung
+      state: 'off'
+    sensor.az32c01_c01_connected_ssid:
+      friendly_name: c01 c01 Connected SSID
+      state: 7wlan
+    sensor.az32c01_c01_foto_sensor32:
+      state_class: measurement
+      unit_of_measurement: '%'
+      device_class: voltage
+      friendly_name: c01 c01 Foto Sensor32
+      state: '100.00'
+    sensor.az32c01_c01_foto_sensor33:
+      state_class: measurement
+      unit_of_measurement: '%'
+      device_class: voltage
+      friendly_name: c01 c01 Foto Sensor33
+      state: '100.00'
+    sensor.az32c01_c01_humidity_sensor25:
+      state_class: measurement
+      unit_of_measurement: '%'
+      device_class: humidity
+      friendly_name: c01 c01 Humidity Sensor25
+      state: '59'
+    sensor.az32c01_c01_ip_address:
+      friendly_name: c01 c01 IP Address
+      state: 192.168.2.129
+    switch.az32c01_c01_restart:
+      icon: mdi:restart
+      friendly_name: c01 c01 Restart
+      state: 'off'
+    binary_sensor.az32c01_c01_sensor32_hell:
+      friendly_name: c01 c01 Sensor32 hell
+      state: 'on'
+    binary_sensor.az32c01_c01_sensor33_hell:
+      friendly_name: c01 c01 Sensor33 hell
+      state: 'on'
+    binary_sensor.az32c01_c01_status:
+      device_class: connectivity
+      friendly_name: c01 c01 Status
+      state: 'on'
+    binary_sensor.az32c01_c01_taster1:
+      friendly_name: c01 c01 taster1
+      state: 'off'
+    binary_sensor.az32c01_c01_taster2:
+      friendly_name: c01 c01 taster2
+      state: 'off'
+    sensor.az32c01_c01_temperature_sensor25:
+      state_class: measurement
+      unit_of_measurement: °C
+      device_class: temperature
+      friendly_name: c01 c01 Temperature Sensor25
+      state: '24.0'
+    sensor.az32c01_c01_uptime_sensor:
+      state_class: total_increasing
+      unit_of_measurement: s
+      device_class: duration
+      icon: mdi:timer-outline
+      friendly_name: c01 c01 Uptime Sensor
+      state: '7664'
+    sensor.az32c01_c01_wifi_signal:
+      state_class: measurement
+      unit_of_measurement: dBm
+      device_class: signal_strength
+      friendly_name: c01 c01 WiFi Signal
+      state: '-73'
+    update.az32c01_firmware:
+      auto_update: false
+      installed_version: 2024.4.2
+      in_progress: false
+      latest_version: 2024.4.2
+      release_summary:
+      release_url: https://esphome.io/changelog/
+      skipped_version:
+      title: ESPHome
+      device_class: firmware
+      entity_picture: https://brands.home-assistant.io/_/esphome/icon.png
+      friendly_name: c01 Firmware
+      supported_features: 1
+      state: 'off'
+    light.az32c05_c05_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: c05 c05 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32c05_c05_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: c05 c05 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32c05_c05_26relais1:
+      friendly_name: c05 c05 26Relais1
+      state: 'on'
+    switch.az32c05_c05_19relais2:
+      friendly_name: c05 c05 19Relais2
+      state: 'on'
+    switch.az32c05_c05_04relais4:
+      friendly_name: c05 c05 04Relais4
+      state: 'on'
+    switch.az32c05_c05_02relais5:
+      friendly_name: c05 c05 02Relais5
+      state: 'off'
+    switch.az32c05_c05_27relais0:
+      friendly_name: c05 c05 27Relais0
+      state: 'on'
+    light.az32c04_c04_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: c04 c04 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32c04_c04_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: c04 c04 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32c04_c04_26relais1:
+      friendly_name: c04 c04 26Relais1
+      state: 'on'
+    switch.az32c04_c04_19relais2:
+      friendly_name: c04 c04 19Relais2
+      state: 'on'
+    switch.az32c04_c04_04relais4:
+      friendly_name: c04 c04 04Relais4
+      state: 'on'
+    switch.az32c04_c04_02relais5:
+      friendly_name: c04 c04 02Relais5
+      state: 'off'
+    switch.az32c04_c04_27relais0:
+      friendly_name: c04 c04 27Relais0
+      state: 'on'
+    light.az32c03_c03_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: c03 c03 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32c03_c03_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: c03 c03 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32c03_c03_26relais1:
+      friendly_name: c03 c03 26Relais1
+      state: 'on'
+    switch.az32c03_c03_19relais2:
+      friendly_name: c03 c03 19Relais2
+      state: 'on'
+    switch.az32c03_c03_04relais4:
+      friendly_name: c03 c03 04Relais4
+      state: 'on'
+    switch.az32c03_c03_02relais5:
+      friendly_name: c03 c03 02Relais5
+      state: 'off'
+    switch.az32c03_c03_27relais0:
+      friendly_name: c03 c03 27Relais0
+      state: 'on'
+    light.az32c02_c02_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: c02 c02 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32c02_c02_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: c02 c02 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32c02_c02_26relais1:
+      friendly_name: c02 c02 26Relais1
+      state: 'on'
+    switch.az32c02_c02_19relais2:
+      friendly_name: c02 c02 19Relais2
+      state: 'on'
+    switch.az32c02_c02_04relais4:
+      friendly_name: c02 c02 04Relais4
+      state: 'on'
+    switch.az32c02_c02_02relais5:
+      friendly_name: c02 c02 02Relais5
+      state: 'off'
+    switch.az32c02_c02_27relais0:
+      friendly_name: c02 c02 27Relais0
+      state: 'on'
+    light.az32c01_c01_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: c01 c01 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32c01_c01_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: c01 c01 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32c01_c01_26relais1:
+      friendly_name: c01 c01 26Relais1
+      state: 'on'
+    switch.az32c01_c01_19relais2:
+      friendly_name: c01 c01 19Relais2
+      state: 'on'
+    switch.az32c01_c01_04relais4:
+      friendly_name: c01 c01 04Relais4
+      state: 'on'
+    switch.az32c01_c01_02relais5:
+      friendly_name: c01 c01 02Relais5
+      state: 'off'
+    switch.az32c01_c01_27relais0:
+      friendly_name: c01 c01 27Relais0
+      state: 'on'
+    light.az32b10_b10_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: b10 b10 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32b10_b10_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: b10 b10 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32b10_b10_26relais1:
+      friendly_name: b10 b10 26Relais1
+      state: 'on'
+    switch.az32b10_b10_19relais2:
+      friendly_name: b10 b10 19Relais2
+      state: 'on'
+    switch.az32b10_b10_04relais4:
+      friendly_name: b10 b10 04Relais4
+      state: 'on'
+    switch.az32b10_b10_02relais5:
+      friendly_name: b10 b10 02Relais5
+      state: 'off'
+    switch.az32b10_b10_27relais0:
+      friendly_name: b10 b10 27Relais0
+      state: 'on'
+    light.az32b09_b09_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: b09 b09 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32b09_b09_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: b09 b09 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32b09_b09_26relais1:
+      friendly_name: b09 b09 26Relais1
+      state: 'off'
+    switch.az32b09_b09_19relais2:
+      friendly_name: b09 b09 19Relais2
+      state: 'on'
+    switch.az32b09_b09_04relais4:
+      friendly_name: b09 b09 04Relais4
+      state: 'on'
+    switch.az32b09_b09_02relais5:
+      friendly_name: b09 b09 02Relais5
+      state: 'off'
+    switch.az32b09_b09_27relais0:
+      friendly_name: b09 b09 27Relais0
+      state: 'on'
+    light.az32b08_b08_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: b08 b08 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32b08_b08_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: None
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: b08 b08 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32b08_b08_26relais1:
+      friendly_name: b08 b08 26Relais1
+      state: 'on'
+    switch.az32b08_b08_19relais2:
+      friendly_name: b08 b08 19Relais2
+      state: 'on'
+    switch.az32b08_b08_04relais4:
+      friendly_name: b08 b08 04Relais4
+      state: 'on'
+    switch.az32b08_b08_02relais5:
+      friendly_name: b08 b08 02Relais5
+      state: 'off'
+    switch.az32b08_b08_27relais0:
+      friendly_name: b08 b08 27Relais0
+      state: 'on'
+    light.az32b07_b07_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: b07 b07 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32b07_b07_26relais1:
+      friendly_name: b07 b07 26Relais1
+      state: 'on'
+    switch.az32b07_b07_19relais2:
+      friendly_name: b07 b07 19Relais2
+      state: 'on'
+    switch.az32b07_b07_04relais4:
+      friendly_name: b07 b07 04Relais4
+      state: 'on'
+    switch.az32b07_b07_02relais5:
+      friendly_name: b07 b07 02Relais5
+      state: 'off'
+    switch.az32b07_b07_27relais0:
+      friendly_name: b07 b07 27Relais0
+      state: 'on'
+    light.az32b07_b07_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: b07 b07 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32b05_b05_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: b05 b05 Light
+      supported_features: 44
+      state: 'on'
+    light.az32b05_b05_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: b05 b05 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    switch.az32b05_b05_26relais1:
+      friendly_name: b05 b05 26Relais1
+      state: 'off'
+    switch.az32b05_b05_19relais2:
+      friendly_name: b05 b05 19Relais2
+      state: 'off'
+    switch.az32b05_b05_04relais4:
+      friendly_name: b05 b05 04Relais4
+      state: 'on'
+    switch.az32b05_b05_02relais5:
+      friendly_name: b05 b05 02Relais5
+      state: 'off'
+    switch.az32b05_b05_27relais0:
+      friendly_name: b05 b05 27Relais0
+      state: 'on'
+    light.az32a05_a05_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: a05 a05 Light
+      supported_features: 44
+      state: 'on'
+    light.az32a05_a05_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: a05 a05 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    switch.az32a05_a05_26relais1:
+      friendly_name: a05 a05 26Relais1
+      state: 'off'
+    switch.az32a05_a05_19relais2:
+      friendly_name: a05 a05 19Relais2
+      state: 'off'
+    switch.az32a05_a05_04relais4:
+      friendly_name: a05 a05 04Relais4
+      state: 'on'
+    switch.az32a05_a05_02relais5:
+      friendly_name: a05 a05 02Relais5
+      state: 'off'
+    switch.az32a05_a05_27relais0:
+      friendly_name: a05 a05 27Relais0
+      state: 'on'
+    light.az32a06_a06_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: a06 a06 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32a06_a06_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: a06 a06 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32a06_a06_26relais1:
+      friendly_name: a06 a06 26Relais1
+      state: 'on'
+    switch.az32a06_a06_19relais2:
+      friendly_name: a06 a06 19Relais2
+      state: 'on'
+    switch.az32a06_a06_04relais4:
+      friendly_name: a06 a06 04Relais4
+      state: 'on'
+    switch.az32a06_a06_02relais5:
+      friendly_name: a06 a06 02Relais5
+      state: 'off'
+    switch.az32a06_a06_27relais0:
+      friendly_name: a06 a06 27Relais0
+      state: 'on'
+    light.az32a04_a04_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: a04 a04 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32a04_a04_26relais1:
+      friendly_name: a04 a04 26Relais1
+      state: 'off'
+    switch.az32a04_a04_19relais2:
+      friendly_name: a04 a04 19Relais2
+      state: 'off'
+    switch.az32a04_a04_04relais4:
+      friendly_name: a04 a04 04Relais4
+      state: 'on'
+    switch.az32a04_a04_02relais5:
+      friendly_name: a04 a04 02Relais5
+      state: 'on'
+    switch.az32a04_a04_27relais0:
+      friendly_name: a04 a04 27Relais0
+      state: 'on'
+    light.az32a04_a04_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: a04 a04 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32a03_a03_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: a03 a03 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32a03_a03_26relais1:
+      friendly_name: a03 a03 26Relais1
+      state: 'off'
+    switch.az32a03_a03_19relais2:
+      friendly_name: a03 a03 19Relais2
+      state: 'off'
+    switch.az32a03_a03_04relais4:
+      friendly_name: a03 a03 04Relais4
+      state: 'on'
+    switch.az32a03_a03_02relais5:
+      friendly_name: a03 a03 02Relais5
+      state: 'on'
+    switch.az32a03_a03_27relais0:
+      friendly_name: a03 a03 27Relais0
+      state: 'on'
+    light.az32a03_a03_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: a03 a03 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32a02_a02_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Rainbow Effect Full
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: a02 a02 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32a02_a02_26relais1:
+      friendly_name: a02 a02 26Relais1
+      state: 'on'
+    switch.az32a02_a02_19relais2:
+      friendly_name: a02 a02 19Relais2
+      state: 'on'
+    switch.az32a02_a02_04relais4:
+      friendly_name: a02 a02 04Relais4
+      state: 'on'
+    switch.az32a02_a02_02relais5:
+      friendly_name: a02 a02 02Relais5
+      state: 'on'
+    switch.az32a02_a02_27relais0:
+      friendly_name: a02 a02 27Relais0
+      state: 'on'
+    light.az32a02_a02_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: a02 a02 Light Blue LED
+      supported_features: 40
+      state: 'on'
+  icon: mdi:alpha-h-circle-outline
+  metadata: {}
+- id: '1715098004732'
+  name: Party-Mäuschen Protokoll
+  entities:
+    switch.az32c01_c01_02relais5:
+      friendly_name: c01 c01 02Relais5
+      state: 'on'
+    switch.az32c01_c01_04relais4:
+      friendly_name: c01 c01 04Relais4
+      state: 'off'
+    switch.az32c01_c01_19relais2:
+      friendly_name: c01 c01 19Relais2
+      state: 'off'
+    switch.az32c01_c01_26relais1:
+      friendly_name: c01 c01 26Relais1
+      state: 'off'
+    switch.az32c01_c01_27relais0:
+      friendly_name: c01 c01 27Relais0
+      state: 'off'
+    binary_sensor.az32c01_c01_bewegung:
+      device_class: motion
+      friendly_name: c01 c01 Bewegung
+      state: 'off'
+    sensor.az32c01_c01_connected_ssid:
+      friendly_name: c01 c01 Connected SSID
+      state: 7wlan
+    sensor.az32c01_c01_foto_sensor32:
+      state_class: measurement
+      unit_of_measurement: '%'
+      device_class: voltage
+      friendly_name: c01 c01 Foto Sensor32
+      state: '100.00'
+    sensor.az32c01_c01_foto_sensor33:
+      state_class: measurement
+      unit_of_measurement: '%'
+      device_class: voltage
+      friendly_name: c01 c01 Foto Sensor33
+      state: '100.00'
+    sensor.az32c01_c01_humidity_sensor25:
+      state_class: measurement
+      unit_of_measurement: '%'
+      device_class: humidity
+      friendly_name: c01 c01 Humidity Sensor25
+      state: '56'
+    sensor.az32c01_c01_ip_address:
+      friendly_name: c01 c01 IP Address
+      state: 192.168.2.129
+    light.az32c01_c01_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: c01 c01 Light
+      supported_features: 44
+      state: 'on'
+    light.az32c01_c01_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: c01 c01 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    switch.az32c01_c01_restart:
+      icon: mdi:restart
+      friendly_name: c01 c01 Restart
+      state: 'off'
+    binary_sensor.az32c01_c01_sensor32_hell:
+      friendly_name: c01 c01 Sensor32 hell
+      state: 'on'
+    binary_sensor.az32c01_c01_sensor33_hell:
+      friendly_name: c01 c01 Sensor33 hell
+      state: 'on'
+    binary_sensor.az32c01_c01_status:
+      device_class: connectivity
+      friendly_name: c01 c01 Status
+      state: 'on'
+    binary_sensor.az32c01_c01_taster1:
+      friendly_name: c01 c01 taster1
+      state: 'off'
+    binary_sensor.az32c01_c01_taster2:
+      friendly_name: c01 c01 taster2
+      state: 'off'
+    sensor.az32c01_c01_temperature_sensor25:
+      state_class: measurement
+      unit_of_measurement: °C
+      device_class: temperature
+      friendly_name: c01 c01 Temperature Sensor25
+      state: '23.2'
+    sensor.az32c01_c01_uptime_sensor:
+      state_class: total_increasing
+      unit_of_measurement: s
+      device_class: duration
+      icon: mdi:timer-outline
+      friendly_name: c01 c01 Uptime Sensor
+      state: '37844'
+    sensor.az32c01_c01_wifi_signal:
+      state_class: measurement
+      unit_of_measurement: dBm
+      device_class: signal_strength
+      friendly_name: c01 c01 WiFi Signal
+      state: '-71'
+    update.az32c01_firmware:
+      auto_update: false
+      installed_version: 2024.4.2
+      in_progress: false
+      latest_version: 2024.4.2
+      release_summary:
+      release_url: https://esphome.io/changelog/
+      skipped_version:
+      title: ESPHome
+      device_class: firmware
+      entity_picture: https://brands.home-assistant.io/_/esphome/icon.png
+      friendly_name: c01 Firmware
+      supported_features: 1
+      state: 'off'
+    light.az32c05_c05_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: c05 c05 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32c05_c05_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: c05 c05 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32c05_c05_26relais1:
+      friendly_name: c05 c05 26Relais1
+      state: 'off'
+    switch.az32c05_c05_19relais2:
+      friendly_name: c05 c05 19Relais2
+      state: 'off'
+    switch.az32c05_c05_04relais4:
+      friendly_name: c05 c05 04Relais4
+      state: 'off'
+    switch.az32c05_c05_02relais5:
+      friendly_name: c05 c05 02Relais5
+      state: 'on'
+    switch.az32c05_c05_27relais0:
+      friendly_name: c05 c05 27Relais0
+      state: 'off'
+    light.az32c04_c04_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: c04 c04 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32c04_c04_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: c04 c04 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32c04_c04_26relais1:
+      friendly_name: c04 c04 26Relais1
+      state: 'off'
+    switch.az32c04_c04_19relais2:
+      friendly_name: c04 c04 19Relais2
+      state: 'off'
+    switch.az32c04_c04_04relais4:
+      friendly_name: c04 c04 04Relais4
+      state: 'off'
+    switch.az32c04_c04_02relais5:
+      friendly_name: c04 c04 02Relais5
+      state: 'on'
+    switch.az32c04_c04_27relais0:
+      friendly_name: c04 c04 27Relais0
+      state: 'off'
+    light.az32c03_c03_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: c03 c03 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32c03_c03_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: c03 c03 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32c03_c03_26relais1:
+      friendly_name: c03 c03 26Relais1
+      state: 'off'
+    switch.az32c03_c03_19relais2:
+      friendly_name: c03 c03 19Relais2
+      state: 'off'
+    switch.az32c03_c03_04relais4:
+      friendly_name: c03 c03 04Relais4
+      state: 'off'
+    switch.az32c03_c03_02relais5:
+      friendly_name: c03 c03 02Relais5
+      state: 'on'
+    switch.az32c03_c03_27relais0:
+      friendly_name: c03 c03 27Relais0
+      state: 'off'
+    light.az32c02_c02_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: c02 c02 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32c02_c02_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: c02 c02 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32c02_c02_26relais1:
+      friendly_name: c02 c02 26Relais1
+      state: 'off'
+    switch.az32c02_c02_19relais2:
+      friendly_name: c02 c02 19Relais2
+      state: 'off'
+    switch.az32c02_c02_04relais4:
+      friendly_name: c02 c02 04Relais4
+      state: 'off'
+    switch.az32c02_c02_02relais5:
+      friendly_name: c02 c02 02Relais5
+      state: 'on'
+    switch.az32c02_c02_27relais0:
+      friendly_name: c02 c02 27Relais0
+      state: 'off'
+    light.az32b10_b10_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: b10 b10 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32b10_b10_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: b10 b10 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32b10_b10_26relais1:
+      friendly_name: b10 b10 26Relais1
+      state: 'off'
+    switch.az32b10_b10_19relais2:
+      friendly_name: b10 b10 19Relais2
+      state: 'off'
+    switch.az32b10_b10_04relais4:
+      friendly_name: b10 b10 04Relais4
+      state: 'off'
+    switch.az32b10_b10_02relais5:
+      friendly_name: b10 b10 02Relais5
+      state: 'on'
+    switch.az32b10_b10_27relais0:
+      friendly_name: b10 b10 27Relais0
+      state: 'off'
+    light.az32b09_b09_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: b09 b09 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32b09_b09_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: b09 b09 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32b09_b09_26relais1:
+      friendly_name: b09 b09 26Relais1
+      state: 'off'
+    switch.az32b09_b09_19relais2:
+      friendly_name: b09 b09 19Relais2
+      state: 'on'
+    switch.az32b09_b09_04relais4:
+      friendly_name: b09 b09 04Relais4
+      state: 'off'
+    switch.az32b09_b09_02relais5:
+      friendly_name: b09 b09 02Relais5
+      state: 'on'
+    switch.az32b09_b09_27relais0:
+      friendly_name: b09 b09 27Relais0
+      state: 'off'
+    light.az32b08_b08_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: b08 b08 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32b08_b08_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: b08 b08 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32b08_b08_26relais1:
+      friendly_name: b08 b08 26Relais1
+      state: 'off'
+    switch.az32b08_b08_19relais2:
+      friendly_name: b08 b08 19Relais2
+      state: 'off'
+    switch.az32b08_b08_04relais4:
+      friendly_name: b08 b08 04Relais4
+      state: 'off'
+    switch.az32b08_b08_02relais5:
+      friendly_name: b08 b08 02Relais5
+      state: 'on'
+    switch.az32b08_b08_27relais0:
+      friendly_name: b08 b08 27Relais0
+      state: 'off'
+    light.az32b07_b07_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: b07 b07 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32b07_b07_26relais1:
+      friendly_name: b07 b07 26Relais1
+      state: 'off'
+    switch.az32b07_b07_19relais2:
+      friendly_name: b07 b07 19Relais2
+      state: 'off'
+    switch.az32b07_b07_04relais4:
+      friendly_name: b07 b07 04Relais4
+      state: 'off'
+    switch.az32b07_b07_02relais5:
+      friendly_name: b07 b07 02Relais5
+      state: 'on'
+    switch.az32b07_b07_27relais0:
+      friendly_name: b07 b07 27Relais0
+      state: 'off'
+    light.az32b07_b07_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: b07 b07 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32b05_b05_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: b05 b05 Light
+      supported_features: 44
+      state: 'on'
+    light.az32b05_b05_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: b05 b05 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    switch.az32b05_b05_26relais1:
+      friendly_name: b05 b05 26Relais1
+      state: 'off'
+    switch.az32b05_b05_19relais2:
+      friendly_name: b05 b05 19Relais2
+      state: 'off'
+    switch.az32b05_b05_04relais4:
+      friendly_name: b05 b05 04Relais4
+      state: 'off'
+    switch.az32b05_b05_02relais5:
+      friendly_name: b05 b05 02Relais5
+      state: 'on'
+    switch.az32b05_b05_27relais0:
+      friendly_name: b05 b05 27Relais0
+      state: 'off'
+    light.az32a05_a05_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: a05 a05 Light
+      supported_features: 44
+      state: 'on'
+    light.az32a05_a05_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: a05 a05 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    switch.az32a05_a05_26relais1:
+      friendly_name: a05 a05 26Relais1
+      state: 'off'
+    switch.az32a05_a05_19relais2:
+      friendly_name: a05 a05 19Relais2
+      state: 'off'
+    switch.az32a05_a05_04relais4:
+      friendly_name: a05 a05 04Relais4
+      state: 'off'
+    switch.az32a05_a05_02relais5:
+      friendly_name: a05 a05 02Relais5
+      state: 'on'
+    switch.az32a05_a05_27relais0:
+      friendly_name: a05 a05 27Relais0
+      state: 'off'
+    light.az32a06_a06_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: a06 a06 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32a06_a06_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: a06 a06 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32a06_a06_26relais1:
+      friendly_name: a06 a06 26Relais1
+      state: 'off'
+    switch.az32a06_a06_19relais2:
+      friendly_name: a06 a06 19Relais2
+      state: 'off'
+    switch.az32a06_a06_04relais4:
+      friendly_name: a06 a06 04Relais4
+      state: 'off'
+    switch.az32a06_a06_02relais5:
+      friendly_name: a06 a06 02Relais5
+      state: 'on'
+    switch.az32a06_a06_27relais0:
+      friendly_name: a06 a06 27Relais0
+      state: 'off'
+    light.az32a04_a04_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: a04 a04 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32a04_a04_26relais1:
+      friendly_name: a04 a04 26Relais1
+      state: 'off'
+    switch.az32a04_a04_19relais2:
+      friendly_name: a04 a04 19Relais2
+      state: 'off'
+    switch.az32a04_a04_04relais4:
+      friendly_name: a04 a04 04Relais4
+      state: 'off'
+    switch.az32a04_a04_02relais5:
+      friendly_name: a04 a04 02Relais5
+      state: 'off'
+    switch.az32a04_a04_27relais0:
+      friendly_name: a04 a04 27Relais0
+      state: 'off'
+    light.az32a04_a04_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: a04 a04 Light Blue LED
+      supported_features: 40
+      state: 'off'
+    light.az32a03_a03_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: a03 a03 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32a03_a03_26relais1:
+      friendly_name: a03 a03 26Relais1
+      state: 'off'
+    switch.az32a03_a03_19relais2:
+      friendly_name: a03 a03 19Relais2
+      state: 'off'
+    switch.az32a03_a03_04relais4:
+      friendly_name: a03 a03 04Relais4
+      state: 'off'
+    switch.az32a03_a03_02relais5:
+      friendly_name: a03 a03 02Relais5
+      state: 'off'
+    switch.az32a03_a03_27relais0:
+      friendly_name: a03 a03 27Relais0
+      state: 'off'
+    light.az32a03_a03_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: a03 a03 Light Blue LED
+      supported_features: 40
+      state: 'on'
+    light.az32a02_a02_light:
+      effect_list:
+      - None
+      - Random
+      - Random Effect With Custom Values
+      - Strobe
+      - Strobe Effect With Custom Values
+      - Flicker
+      - Flicker Effect With Custom Values1
+      - Addressable Flicker
+      - Flicker Effect With Custom Values2
+      - Rainbow
+      - Rainbow Effect Full
+      - Rainbow Effect Half
+      - Color Wipe
+      - Color Wipe Effect With Custom Values
+      - Scan
+      - Scan Effect With Custom Values
+      - Twinkle
+      - Twinkle Effect With Custom Values
+      - Fireworks
+      - Fireworks Effect With Custom Values
+      - Custom Automation Effect
+      supported_color_modes:
+      - rgb
+      effect: Scan
+      color_mode: rgb
+      brightness: 255
+      hs_color:
+      - 0
+      - 0
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      friendly_name: a02 a02 Light
+      supported_features: 44
+      state: 'on'
+    switch.az32a02_a02_26relais1:
+      friendly_name: a02 a02 26Relais1
+      state: 'off'
+    switch.az32a02_a02_19relais2:
+      friendly_name: a02 a02 19Relais2
+      state: 'on'
+    switch.az32a02_a02_04relais4:
+      friendly_name: a02 a02 04Relais4
+      state: 'off'
+    switch.az32a02_a02_02relais5:
+      friendly_name: a02 a02 02Relais5
+      state: 'off'
+    switch.az32a02_a02_27relais0:
+      friendly_name: a02 a02 27Relais0
+      state: 'off'
+    light.az32a02_a02_light_blue_led:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: a02 a02 Light Blue LED
+      supported_features: 40
+      state: 'on'
+  icon: mdi:alpha-h-box-outline
+  metadata: {}

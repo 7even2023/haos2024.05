@@ -1,0 +1,5 @@
+'1706197964997':
+  alias: Neues Skript
+  sequence:
+  - wait_template: ''
+    continue_on_timeout: true

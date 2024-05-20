@@ -1,0 +1,66 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# HEY JARVIS - lokaler Sprachassistent mit OpenWakeWord aus dev version
+api:
+
+# configuration.yaml entry debug aotom echo troublemaker big backups
+# assist_pipeline:
+#   debug_recording_dir: /share/assist_pipeline
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+# Adds local host auto+szene information 
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+# Adds local host sensor information sensor.yaml template.yaml 
+template: !include template.yaml
+#sensor: !include sensor.yaml
+# Die System Monitor YAML-Konfiguration wird entfernt Version 2024.7.0.
+#template:
+
+sensor:
+      - platform: time_date
+        display_options:
+        - 'time'
+        - 'date'
+        - 'date_time'
+        - 'date_time_utc'
+        - 'date_time_iso'
+        - 'time_date'
+        - 'time_utc'
+
+#  - platform: systemmonitor
+#    resources:
+#      - type: disk_use_percent
+#        arg: /config
+
+
+# STEPPERS
+#  - input_number: 
+#    stepper_control:
+#    - name: Stepper Control
+#      initial: 0
+#      min: -1000
+#      max: 1000
+#      step: 1
+#      mode: slider
+
+      #  stepper_control:
+      #    name: Stepper Control
+      #    initial: 0
+      #    min: -500000
+      #    max: 500000
+      #    step: 100
+      #    mode: box
+
+# Meine Dummy Sensoren Für Energy Dash Board
+#template: !include template.yaml
+
+#template:
+
+
+

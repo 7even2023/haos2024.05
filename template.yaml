@@ -1,0 +1,179 @@
+### DUMMY SENSOREN SHELLY3EM ###
+- sensors:
+    count_relais_on:
+      friendly_name: "# relais on"
+      unit_of_measurement: "on"
+      value_template: >
+        {% set reject = ['light.alle_relais', ] %}
+        {{ states.switch | rejectattr('entity_id', 'in', reject) | selectattr('state','equalto','on')| list | length }}
+
+### DUMMY SENSOREN SHELLY3EM ###
+- sensors:
+    count_lights_on:
+      friendly_name: "# Lights on"
+      unit_of_measurement: "on"
+      value_template: >
+        {% set reject = ['light.alle_lampen', ] %}
+        {{ states.light | rejectattr('entity_id', 'in', reject) | selectattr('state','equalto','on')| list | length }}
+
+- sensor:
+      - name: "Date and time"
+        state: "{{ as_timestamp(states('sensor.date_time_iso')) | timestamp_custom('%A %B %-d, %I:%M %p') }}"
+        icon: "mdi:calendar-clock"
+
+- binary_sensor:
+      - name: "HomeLab Licht Sensor veraltet 5min"
+        state: >
+          {{ as_timestamp(now()) - as_timestamp(states.sensor.az32a00_a00_foto_sensor32.last_updated) <= 300 and
+            as_timestamp(now()) - as_timestamp(states.sensor.az32a00_a00_foto_sensor33.last_updated) <= 300 
+            }}
+
+- binary_sensor:
+      - name: "Küche Licht Sensor veraltet 5min"
+        state: >
+          {{ as_timestamp(now()) - as_timestamp(states.sensor.az32a01_a01_foto_sensor32.last_updated) <= 300 and
+            as_timestamp(now()) - as_timestamp(states.sensor.az32a01_a01_foto_sensor33.last_updated) <= 300 
+            }}
+
+- binary_sensor:
+      - name: "Bad Licht Sensor veraltet 5min"
+        state: >
+          {{ as_timestamp(now()) - as_timestamp(states.sensor.az32a02_a02_foto_sensor32.last_updated) <= 300 and
+            as_timestamp(now()) - as_timestamp(states.sensor.az32a02_a02_foto_sensor33.last_updated) <= 300 
+            }}
+
+### 01. Totaler Verbrauch in Watt (fürs normale Dashboard)
+- sensor:
+    - name: "Total Power"
+      unique_id: "Total_Power"
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: "W"
+      # state: "497"
+      state: >
+        {{ states.sensor.stardate.state | float(0) * 10 / 100}}
+
+### 02.Totaler Verbrauch in kWh (für Energy Dashboard):
+- sensor:
+    - name: "Total Energy Use"
+      unique_id: "Total_Energy_Use"
+      device_class: energy
+      #state_class: total_increasing
+      state_class: total
+      unit_of_measurement: "kWh"
+      #state: "1314"
+      state: >
+        {{ states.sensor.stardate.state | float(0) * 10 / 100 }}
+#      state: >
+#        {{ 
+#        states('sensor.hausverbrauch_channel_a_energy')| float(0) + 
+#        states('sensor.hausverbrauch_channel_b_energy')| float(0) +
+#        states('sensor.hausverbrauch_channel_c_energy')| float(0) 
+#        }}
+
+### 03. Totale Einspeisung in kWh (für Energie Dashboard): 1 = 7.782,65
+- sensor:
+    - name: "Total Energy Returned"
+      unique_id: "Total_Energy_Returned"
+      device_class: energy
+      state_class: total
+      unit_of_measurement: "kWh"
+      #tate: "102"
+      state: >
+        {{ states.sensor.stardate.state | float(0) * 10 / 100 }}
+#      state: >
+#        {{ 
+#        states('sensor.hausverbrauch_channel_a_energy_returned')| float(0) + 
+#        states('sensor.hausverbrauch_channel_b_energy_returned')| float(0) +
+#        states('sensor.hausverbrauch_channel_c_energy_returned')| float(0) 
+#        }}
+
+### 04. Totale Einspeisung ( Gesamtstromverbrauch unter 0):
+  #Hier seht ihr meinen Code für die PV Einspeisung (Shelly 3em)
+  #https://book.cryd.de/books/projekte/page/code-schnipsel
+  #https://www.youtube.com/watch?v=rgtOXYFcRV8
+
+- sensor:
+    - name: PV Einspeisung
+      unique_id: "pv_einspeisung"
+      unit_of_measurement: "W"
+      device_class: power
+      #state_class: total
+      #state: "200"
+      state: >
+        {{ states.sensor.stardate.state | float(0) * 0.5 / 1000 }}
+
+### 05. Totale Einspeisung (als Positiv Wert):
+
+- sensor:
+    - name: PV Einspeisung negiert
+      unique_id: "pv_einspeisung_negiert"
+      unit_of_measurement: "W"
+      device_class: power
+      #state_class: total
+      state: "{{ states('sensor.pv_einspeisung')|float * -1 }}"
+
+### 06. Hier noch der Energy Sensor der Steckdose
+- sensor:
+    - name: "pv_anlage_smartenergy_metering_summation_delivered"
+      device_class: energy
+      state_class: total
+      unit_of_measurement: "kWh"
+      #state: "1204"
+      state: >
+        {{ states.sensor.stardate.state | float(0) * 10 /1000000 }}
+
+### 07. Hier noch der Gas Sensor m³, GJ, kWh, MJ, MWh, Wh
+- sensor:
+    - name: "gas_anlage_smart_metering_summation_delivered"
+      device_class: gas
+      state_class: total
+      unit_of_measurement: "m³"
+      state: >
+        {{ states.sensor.stardate.state | float  *  2 }}
+
+- sensor:
+    - name: "gas_consumption"
+      device_class: gas
+      state_class: total
+      unit_of_measurement: "m³"
+      state:  >
+        {% set state = states('sensor.gas_anlage_smart_metering_summation_delivered') %}
+        {{ state | float + 1 }}
+
+### 08. Hier noch der Wasser Sensor L, m³
+- sensor:
+    - name: "water_anlage_smart_metering_summation_delivered"
+      device_class: water
+      state_class: total
+      unit_of_measurement: "m³"
+      state:  >
+        {{ states.sensor.stardate.state | float  *  0.5 }}
+
+- sensor:
+    - name: "water_consumption"
+      device_class: water
+      state_class: total
+      unit_of_measurement: "m³"
+      state:  >
+        {% set state = states('sensor.water_anlage_smart_metering_summation_delivered') %}
+        {{ state | float + 0.1 }}
+
+### 09. Hier noch der Sensor GJ, kWh, MJ, MWh, Wh in die Batterie ein
+- sensor:
+    - name: "bat1in_anlage_smart_metering_summation_delivered"
+      device_class: energy
+      state_class: total
+      unit_of_measurement: "kWh"
+      #state: "98"
+      state: >
+        {{ states.sensor.stardate.state | float(0) * 10 /10000000 }}
+### 10. Hier noch der Sensor GJ, kWh, MJ, MWh, Wh in die Batterie aus
+- sensor:
+    - name: "bat1out_anlage_smart_metering_summation_delivered"
+      device_class: energy
+      state_class: total
+      unit_of_measurement: "kWh"
+      #state: "2"
+      state: >
+        {{ states.sensor.stardate.state | float(0) * 10 /10000000 }}
