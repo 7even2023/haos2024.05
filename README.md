@@ -1,20 +1,17 @@
 haos2024.05main 20.05.2024
 
 # haos2024.05/tree/main - yaml esphome files 
-### note: source dev
+### note: source main (srv1+srv2@7wlan) 
 <img src='srv7wlan7haos_main.png' width='50%'/>
 
-### note: source dev az-esp32v4 (pcb) 
+# haos2024.05/tree/dev - yaml backup esphome files 
+### note: source dev (srv7@6wlan) 
 <img src='srv7wlan6haos_dev.png' width='70%'/>
 
-# haos v1.2.3 dashboard home panel overview env
+# haos v1.2.3 dashboard home panel env.overview (srv1+srv2+srv7@7wlan) 
 <img src='srv7wlan7haos_energies123.png' width='50%'/>
 
-## note: haos esphome devices panel overview
-<img src='ch0-201_esp32-s3_wroom+5x-az3200x+cb32_esphome-haos11.png' width='70%'/>
-
-
-# env.0 az32 = home lab (guest_room)
+# env.0 az32 = home lab (guest_room) az-esp32v4
 <img src='ch0-600_haos11_sensors_az32guest.png' width='70%'/>
 
 ### button + 4xrelais(incl led) + dht11 + ultrasonic
