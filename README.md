@@ -4,6 +4,8 @@ haos2024.05main 20.05.2024 13:27
 ### note: source main (srv7@7wlan) 
 <img src='git-pics/pcb-srv7wlan7haos_main.png' width='50%'/>
 
+https://www.youtube.com/watch?v=jPW5DhYZHiI
+
 # haos2024.05/tree/dev - yaml backup esphome files 
 ### note: source dev (srv7@6wlan) 
 <img src='git-pics/pcb-srv7wlan6haos_dev.png' width='50%'/>
