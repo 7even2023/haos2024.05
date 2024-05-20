@@ -61,11 +61,15 @@ env: button + relais(incl led) +temp1=bme280 +temp2=dht11
 <img src='git-pics/pcb-a06side.png' width='50%'/>
 
 wip-changelog200524-1437: 
+
 todo hyperlinks in readme to yaml file links 
 
- overview env location w.i.p. (location:ort)  az-esp32v4
+overview env location w.i.p. (location:ort)  az-esp32v4
+
 <img src='git-pics/pcb-floorplan.png' width='50%'/>
-  overview env connected w.i.p. (speed:verbindung) mesh-wifi
+
+overview env connected w.i.p. (speed:verbindung) mesh-wifi
+
 <img src='git-pics/pcb-env_nas1+2+3_6wlan.png' width='50%'/>
 
 wip-changelog200524-1438: 
