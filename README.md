@@ -9,7 +9,7 @@ Video:
 
 https://www.youtube.com/watch?v=jPW5DhYZHiI
 
-<a href="https://www.youtube.com/watch?v=jPW5DhYZHiI">Video<img src='git-pics/pcb-srv7wlan7haos_main.png' width='50%'/></a>
+<a href="https://www.youtube.com/watch?v=jPW5DhYZHiI"><img src='git-pics/pcb-srv7wlan7haos_main.png' width='50%'/></a>
 
 # haos2024.05/tree/dev - yaml backup esphome files 
 ### note: source dev (srv7@6wlan) 
