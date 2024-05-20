@@ -1,14 +1,12 @@
 haos2024.05main 20.05.2024
 
 # haos2024.05/tree/main) - yaml esphome files 
-## fn-esp32s3 (breadboard cam)
 ### note: 
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">ch0-001_esphome-web-e911d0.yaml</a>
-<img src='ch0-003_ultimate_box_unboxed_board.jpg' width='50%'/>
+<img src='srv7wlan7haos_main.png' width='50%'/>
 
 ### note4: source Freenove tutorial chapters playlist
-<img src='ch0-004_esp32-s3_wroom+cam+2usb_pinout.png' width='70%'/>
-https://www.youtube.com/playlist?list=PLlCFIOdyWXfXNI98tTjUfWsx7-i59nKBr
+<img src='srv7wlan6haos_dev.png' width='70%'/>
 
 # az-esp32v4 (pcb)  
 
