@@ -1,0 +1,64 @@
+esphome:
+  name: az32e08
+  friendly_name: az32e08
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "lifeqjgbLTue6l1wIad6kHYjfWDC6Ntn3H736kWwsHE="
+
+ota:
+  password: "6a265a55f6bccaa885ac1135676928cc"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Az32E08 Fallback Hotspot"
+    password: "KGF86DJ5m7cg"
+
+captive_portal:
+
+i2c: #(0x27,16,2) lcd1602 PCF8574T, 1=GND, 2=+5V, 3=SDA(orange)auf PIN13, 4=SCL(gelb)auf PIN14  (!PIN12 strapping pin not used)
+  sda: GPIO21  #32
+  scl: GPIO22  #33
+  frequency: 400kHz # fix warnings
+
+time:
+  - platform: homeassistant
+    id: my_time
+
+sensor:
+  - platform: homeassistant
+    id: speedtestdownload2
+    entity_id: sensor.speedtest_download
+    internal: true
+  - platform: homeassistant
+    id: speedtestupload2
+    entity_id: sensor.speedtest_upload
+    internal: true
+
+
+
+display:
+  - platform: lcd_pcf8574
+    dimensions: 20x4
+    address: 0x27
+    update_interval: 1s  # 1s - 10s "Mbps");
+    id: lcd
+    lambda: |-
+      it.strftime(0, 0, "Time: %H:%M:%S", id(my_time).now());
+      it.strftime(0, 1, "Date: %d.%m.%Y", id(my_time).now());
+      it.printf(0, 2, "Download: %2.1f", id(speedtestdownload2).state);
+      it.printf(0, 3, "Upload^^: %2.1f", id(speedtestupload2).state);
+    

@@ -1,0 +1,196 @@
+esphome:
+  name: az32d03
+  friendly_name: az32d03
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+# level: none # default
+# level: error
+# level: warn
+# level: info
+  level: debug
+# level: verbose
+# level: very_verbose
+
+mdns:
+  disabled: false
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "Sa9wdKSB/Oj+rsRyNg0U6Ipo+kIbyUbgDIaCx69yoRI="
+
+ota:
+  password: "8a107b14cee3d9e13c41cdebbc024b41"
+
+wifi:
+  ssid: 7wlan # !secret wifi_ssid
+  password: !secret wifi_password
+#  power_save_mode: none
+#  reboot_timeout: 0s
+#  #domain: ".local"
+#  output_power: 20dB
+#  fast_connect: true
+
+#  manual_ip:
+#    static_ip: 192.168.1.168 # 3EG5-Garten (A) = Bereich ,  d3 unter test 1 lcd1602 time+ date over ha + 4tasten test 
+#    gateway: 192.168.1.1
+#    subnet: 255.255.255.0 # subnet2 test 255.255.0.0
+#    dns1: 192.168.1.1
+#    dns2: 8.8.8.8
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Az32D03 Fallback Hotspot"
+    password: "WFYs0f1sNZIZ"
+
+captive_portal: # fallback webseite netzwerkauswahl
+
+web_server:  # aktiv mit domain: ".local"
+  port: 80 
+
+#i2c: #(0x27,16,2) lcd1602 PCF8574T, 1=GND, 2=+5V, 3=SDA(orange)auf PIN21, 4=SCL(gelb)auf PIN22 
+#  sda: GPIO21  #32
+#  scl: GPIO22  #33
+#  scan: True
+#  id: bus_a
+#  frequency: 50kHz  # Component xxxxxx took a long time for an operation  10kHz min 20works def 50kHz  fix = frequency 400kHz 
+
+i2c:
+   - id: bus_a
+     sda: GPIO21
+     scl: GPIO22
+     scan: true
+     frequency: 400kHz
+   - id: bus_b
+     sda: GPIO32  #GPIO32 17
+     scl: GPIO33  #GPIO33 18
+     scan: true
+     #frequency: 10kHz   # out comment = def 50kHz
+
+time:
+  - platform: homeassistant
+    id: my_time
+
+sensor:
+  - platform: bme280_i2c
+    i2c_id: bus_b
+    address: 0x76
+    temperature:
+      name: "BME280d03 Temperature"
+      id: bme280_temperature
+    pressure:
+      name: "BME280d03 Pressure"
+      id: bme280_pressure
+    humidity:
+      name: "BME280d03 Humidity"
+      id: bme280_humidity
+    update_interval: 60s #10s= errors,  30s ok , 40s slow cold ic
+
+display:
+  - platform: lcd_pcf8574
+    dimensions: 16x2
+    i2c_id: bus_a
+    address: 0x27
+    id: my_display
+    update_interval: 3s #1=real life response, 2s ok , 3s slow display 10s super slow reaction of buttons overjump page
+    lambda: |-
+
+          switch (id(page)){
+            case 1:
+              it.print(0, 0, "Page1");
+              it.strftime(1, 1, "Time %H:%M:%S", id(my_time).now());
+              break;
+            case 2:
+              it.print(0, 0, "Page2");
+              it.strftime(1, 1, "Date %d.%m.%Y", id(my_time).now()); 
+              break;
+            case 3:
+              it.print(0, 0, "Page3");
+              it.printf(1, 1, "Temp %.1f C", id(bme280_temperature).state);
+              break;
+            case 4:
+              it.print(0, 0, "Page4");
+              it.printf(1, 1, "Humi %.1f rel", id(bme280_humidity).state);
+              break;
+          }
+    
+
+# Declare a LCD menu
+
+globals:
+- id: page
+  type: int
+  initial_value: "1"
+
+#auto scroll pages 10s
+interval:
+- interval: 50s #30s fast 
+  then:
+    - lambda: |-
+        id(page) = (id(page) + 1);
+        if (id(page) > 4) {
+          id(page) = 1;
+        }
+
+binary_sensor:
+  - platform: gpio
+    pin: GPIO36 #links oben orange
+    id: taster1   
+    name: taster1
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = (id(page) - 1);
+         if (id(page) < 1) {
+          id(page) = 1;
+         }
+
+  - platform: gpio
+    pin: GPIO39 #rechts oben sw
+    id: taster2
+    name: taster2   
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = (id(page) + 1);
+         if (id(page) > 4) {
+          id(page) = 4;
+         }
+
+  - platform: gpio
+    pin: GPIO34 #links unten
+    id: taster3   
+    name: taster3
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = 1;
+
+
+  - platform: gpio
+    pin: GPIO35 #rechts unten
+    id: taster4
+    name: taster4   
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = 4;
+       

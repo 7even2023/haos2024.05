@@ -1,0 +1,157 @@
+esphome:
+  name: az32d10
+  friendly_name: az32d10
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "MCvV81FTi/BGDZCdX5cDYSI/3uUXug+R7G6QJO3Jmk4="
+  services:
+    - service: start_buzzer
+      variables:
+        delay_time: int
+      then:
+        - switch.turn_on: buzzer_pf_id
+        - delay: !lambda 'return delay_time;'
+        - switch.turn_off: buzzer_pf_id
+    - service: stepper_control
+      variables:
+        target: int
+      then:
+        - stepper.report_position:
+            id: ss4h_pf_motor
+            position: 0      
+        - stepper.set_target:
+            id: ss4h_pf_motor
+            target: !lambda 'return target;'
+
+ota:
+  password: "8d15df932a05da857bc94063731aa64d"
+
+wifi:
+  ssid: 7wlan # !secret wifi_ssid
+  password: !secret wifi_password
+#  power_save_mode: none
+#  reboot_timeout: 0s
+#  domain: ".local"       #  domain  .fritz.box 
+#  output_power: 20dB
+#  fast_connect: true
+
+#  manual_ip:
+#    static_ip: 192.168.1.175 # 3EG5-Garten (A) = Bereich ,  d10
+#    gateway: 192.168.1.1
+#    subnet: 255.255.255.0 # subnet2 test 255.255.0.0
+#    dns1: 192.168.1.1
+#    dns2: 8.8.8.8
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Az32D10 Fallback Hotspot"
+    password: "HJmfRBcT7BoV"
+
+captive_portal:
+
+stepper:
+  - platform: uln2003  # 5V und GND
+    id: ss4h_pf_motor #stepper1
+    sleep_when_done: true
+    pin_a: GPIO5  #D1 rot
+    pin_b: GPIO17 #D2 orange
+    pin_c: GPIO16 #D3 grün
+    pin_d: GPIO4  #D4 gelb
+    max_speed: 250 steps/s 
+
+# MQ2 Smoke Gas Sensor
+sensor:
+  - platform: template
+    name: "Stepper Position"
+    unit_of_measurement: steps
+    lambda: return id(ss4h_pf_motor).current_position;
+    update_interval: 1s
+
+  - platform: wifi_signal
+    name: "D10 WiFi Signal"
+    update_interval: 4s     #60s
+    filters:
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 15
+          send_first_at: 1
+
+switch:
+  - platform: restart
+    name: "D10 Restart"
+
+  - platform: shutdown
+    name: "D10 Shutdown"
+
+  - platform: gpio
+    pin: 2
+    name: "Buzzer_PF"
+    id: buzzer_pf_id
+  - platform: gpio
+    pin: 1
+    name: "Led_PF"
+    id: led_pf_id
+    inverted: yes
+
+binary_sensor:
+  - platform: status
+    name: "D10 Status"
+
+  - platform: gpio
+    pin: GPIO35 #5
+    name: "PIR_PF" 
+  - platform: gpio
+    pin: GPIO34 #4
+    name: "Button_PF" 
+    filters:
+    - invert:
+    on_click:
+      - min_length: 1000ms
+        max_length: 5000ms
+        then:
+        - switch.turn_on: buzzer_pf_id
+        - switch.turn_on: led_pf_id
+        - delay: 100ms
+        - switch.turn_off: buzzer_pf_id
+        - switch.turn_off: led_pf_id
+        - delay: 50ms
+        - switch.turn_on: buzzer_pf_id
+        - switch.turn_on: led_pf_id
+        - delay: 100ms
+        - switch.turn_off: buzzer_pf_id
+        - switch.turn_off: led_pf_id
+        - stepper.report_position:
+            id: ss4h_pf_motor
+            position: 0      
+        - stepper.set_target:
+            id: ss4h_pf_motor 
+            target: -200
+    on_release:
+      - switch.turn_on: buzzer_pf_id
+      - switch.turn_on: led_pf_id
+      - delay: 100ms
+      - switch.turn_off: buzzer_pf_id
+      - switch.turn_off: led_pf_id
+      - stepper.report_position:
+          id: ss4h_pf_motor
+          position: 0      
+      - stepper.set_target:
+          id: ss4h_pf_motor 
+          target: 800
+
+time:
+  - platform: sntp
+    id: esphome_time
+    servers:
+      - 0.pool.ntp.org
+    
