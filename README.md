@@ -4,9 +4,10 @@ haos2024.05main 20.05.2024 13:27
 ### note: source main (srv7@6wlan) 
 
 Home Assistant 2024 05 20 2xwlan 
-https://www.youtube.com/watch?v=jPW5DhYZHiI
 
-<img src='git-pics/pcb-srv7wlan7haos_main.png' width='50%'/>
+Video: https://www.youtube.com/watch?v=jPW5DhYZHiI
+
+<a href="https://www.youtube.com/watch?v=jPW5DhYZHiI">Video<img src='git-pics/pcb-srv7wlan7haos_main.png' width='50%'/></a>
 
 # haos2024.05/tree/dev - yaml backup esphome files 
 ### note: source dev (srv7@6wlan) 
