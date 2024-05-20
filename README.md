@@ -18,24 +18,21 @@ haos2024.05main 20.05.2024 13:27
 # env.0 az32a00 = home lab (guest_room)
 <img src='git-pics/pcb-a00.jpg' width='70%'/>
 
-pcb: button + relais(incl led) + bme280
-note: value id temp + humi + press
+env: button + relais(incl led) + bme280 id temp + humi + press
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a00.yaml</a>
 <img src='git-pics/pcb-a00side.png' width='50%'/>
 
 # env.1 az32a01 = kueche (kitchen)
 <img src='git-pics/pcb-a01.jpg' width='70%'/>
 
-pcb: button + relais(incl led) + bme280
-note: value id temp + humi + press
+env: button + relais(incl led) + bme280 id temp + humi + press
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a01.yaml</a>
 <img src='git-pics/pcb-a01side.png' width='50%'/>
 
 # env.2 az32a02 = bad (bath)
 <img src='git-pics/pcb-a02.jpg' width='70%'/>
 
-pcb: button + relais(incl led) + bme280
-note: value id temp + humi + press
+env: button + relais(incl led) + bme280 id temp + humi + press
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a02.yaml</a>
 <img src='git-pics/pcb-a02side.png' width='50%'/>
 
@@ -53,17 +50,17 @@ env: relais(incl led) + dht11
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a04.yaml</a>
 <img src='git-pics/pcb-a04side.png' width='50%'/>
 
-# env.5 az32a05 = flur (todo motion) wip motion(ir)
+env.5 az32a05 = flur (todo motion a05-b05) wip(pir)
 <img src='git-pics/pcb-a05.jpg' width='70%'/>
 
-env: neopixel rgb light (relais(incl led) + fotosensor + thermistor) 
+env: relais(incl led) + fotosensor + pir) 
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a05.yaml</a>
 <img src='git-pics/pcb-a05side.png' width='50%'/>
 
 # env.6 az32a06 = balkon (outside/aussen)
 <img src='git-pics/pcb-a06.jpg' width='70%'/>
 
-env: relais(incl led) + dht11 
+env: relais(incl led) +temp1=bme280 +temp2=dht11 
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a06.yaml</a>
 <img src='git-pics/pcb-a06side.png' width='50%'/>
 
