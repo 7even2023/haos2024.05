@@ -35,28 +35,28 @@ env: button + relais(incl led) + bme280 id temp + humi + press
 # env.3 az32a03 = schlafzimmer (sleeping_room)
 <img src='git-pics/pcb-a03.jpg' width='70%'/>
 
-env: button + relais(incl led) + bme280 
+env: button + relais(incl led) + bme280 id temp + humi + press
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a03.yaml</a>
 <img src='git-pics/pcb-a03side.png' width='50%'/>
 
 # env.4 az32a04 = wohnzimmer (living_room)
 <img src='git-pics/pcb-a04.jpg' width='70%'/>
 
-env: relais(incl led) + dht11 
+env: button + relais(incl led) + bme280 id temp + humi + press
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a04.yaml</a>
 <img src='git-pics/pcb-a04side.png' width='50%'/>
 
 # env.5 az32a05 = flur (todo motion a05-b05) wip(pir)
 <img src='git-pics/pcb-a05.jpg' width='70%'/>
 
-env: relais(incl led) + fotosensor + pir) 
+env: button + relais(incl led) + bme280,fotosensor,pir,ultrasonic  
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a05.yaml</a>
 <img src='git-pics/pcb-a05side.png' width='50%'/>
 
 # env.6 az32a06 = balkon (outside/aussen)
 <img src='git-pics/pcb-a06.jpg' width='70%'/>
 
-env: relais(incl led) +temp1=bme280 +temp2=dht11 
+env: button + relais(incl led) +temp1=bme280 +temp2=dht11 
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a06.yaml</a>
 <img src='git-pics/pcb-a06side.png' width='50%'/>
 
