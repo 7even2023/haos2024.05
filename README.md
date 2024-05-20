@@ -21,7 +21,7 @@ haos2024.05main 20.05.2024 13:27
 pcb: button + relais(incl led) + bme280
 note: value id temp + humi + press
 ### <a href="https://github.com/7even2023/yaml/blob/76fa6ba39aad9fe83afc449854af3aca2f6d9836/ch0-001_esphome-web-e911d0.yaml">az32a00.yaml</a>
-<img src='git-pics/pcb-a00.jpg' width='50%'/>
+<img src='git-pics/pcb-a00side.png' width='50%'/>
 
 # env.1 az32a01 = kueche (kitchen)
 <img src='git-pics/pcb-a01.jpg' width='70%'/>
