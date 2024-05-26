@@ -1,16 +1,18 @@
 substitutions:
-  name: "m5-dial"
-  #friendly_name: "m5-dial1"
+  devicename: "m5-dial"
+  friendly_name: "m5-dial1"
   wifi_ssid: !secret wifi_ssid
   wifi_password: !secret wifi_password  
 
-#esphome:
-#  name: ${name}
-#  name_add_mac_suffix: false
+esphome:
+  name: ${devicename}
+  name_add_mac_suffix: false
+  friendly_name: "m5-dial1"
+  comment: M5Dial rotary button
 #  project:
 #    name: smarthomeyourself.m5_dial
 #    version: "1.0"
-#  compile_process_limit: 1
+  compile_process_limit: 1
 #  platformio_options:
 #    board_build.flash_mode: dio
 #    lib_deps:
@@ -23,13 +25,17 @@ substitutions:
 #      - m5stack/M5Unified
 #      - m5stack/M5Dial
     
-#esp32:
-#  board: esp32-s3-devkitc-1
-#  framework:
-#    type: arduino
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
 
-#logger:
-#  level: DEBUG
+logger:
+  level: DEBUG
+
+mdns:
+  disabled: false #default
+  
 api:
   encryption:
     key: v1Rt5j/BiibHjpTX60onKOeEK4tLk97B/N1gzxbP4BM=
@@ -45,7 +51,7 @@ wifi:
   power_save_mode: none
   reboot_timeout: 0s
 #  domain: ".local"       #  domain  .fritz.box 
-  output_power: 20dB
+#  output_power: 20dB
   fast_connect: true
   ap:
     password: "12345678"
@@ -55,7 +61,7 @@ packages:
     url: https://github.com/SmartHome-yourself/m5-dial-for-esphome
     ref: dev
     file: shys-m5-dial.yaml
-    refresh: 1s
+    refresh: 10s
 
 external_components:
   - source:
@@ -69,6 +75,13 @@ time:
     id: homeassistant_time
     timezone: Europe/Berlin
 
+  - platform: homeassistant
+    id: my_time2
+    on_time:
+      - seconds: /10
+        then:
+#        - light.toggle: rgb_light
+
 #dashboard_import:
 # 1.Pack Default
   #package_import_url: github://esphome/firmware/esphome-web/esp32s3.yaml@v2
@@ -79,6 +92,14 @@ time:
 
 #web_server:  # aktiv mit domain: ".local"
 #   port: 80 
+
+web_server:
+  port: 80
+  version: 2
+  local: true
+  auth:
+    username: dial
+    password: control
 
 binary_sensor:
   - platform: gpio
@@ -135,6 +156,15 @@ text_sensor:
     ssid:
       name: "${name} Connected SSID"
       #id: ${name}_connectedssid
+
+  - platform: template
+    id: time_mytime2
+    name: Time mytime2
+    # Alternatively, you can use .utcnow() to get the current UTC time. %Y-%m-%d %H:%M:%S
+    lambda: | 
+      auto time_text = id(my_time2).now().strftime("%H:%M:%S %d.%m.%Y");
+      return {time_text};
+    update_interval: 10s
 
 switch:
   - platform: restart
@@ -228,9 +258,7 @@ shys_m5_dial:
               - name: 1Live
                 content_id: 1Live
                 content_type: TUNEIN
-              - name: WDR2
-                content_id: "http://wdr-wdr2-bergischesland.icecast.wdr.de/wdr/wdr2/bergischesland/mp3/128/stream.mp3"
-                content_type: custom
+
 
     #lock:
     #  - entity: lock.my_lock1

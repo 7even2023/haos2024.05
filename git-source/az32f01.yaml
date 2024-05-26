@@ -1,11 +1,65 @@
-esphome:
+#Define Project
+substitutions:
   name: az32f01
-  friendly_name: az32f01
+  friendly_name: f01
+  version:  "23.5.24"
+  device_description: ${name} made by 7even - version ${version}.
+  # ------------------
+  #   Pin-Belegung / Switch     # GND über 19   kabel schwarz/black
+  # ------------------
+ # statusled_01red_pin: GPIO26   # a01 26Relais1 kabel lila/purple
+ # statusled_02green_pin: GPIO19 # a01 19Relais2 kabel grau/grey
+ #  statusled_03blue_pin: GPIO18  # a01 18Relais3 kabel weiss/white
+  
+ # statusled_04red_pin: GPIO4    # a01 04Relais4 kabel blau/blue
+ # statusled_05green_pin: GPIO2  # a01 02Relais5 Kabel grün/green
 
+#  pir_pin: GPIO25               # f01 Bewegung
+#  dht_pin: GPIO23               # f01 has 2xbme 
+#  led_pin: GPIO23               # f01 27Relais0 led_id mytime2
+#  rgb_pin: GPIO14               # f01_light 8x WS2812B
+#####################################################################################  
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  comment: Multisensor 2xBME280
+  name_add_mac_suffix: false
+  platformio_options:
+    board_build.flash_mode: dio
+
+  on_boot:
+  #  - binary_sensor.template.publish:
+  #      id: timer_sensor
+  #      state: False
+  #  - binary_sensor.template.publish:
+  #      id: script_running_sensor
+  #      state: False
+  #  - sensor.template.publish:
+  #      id: countdown_count
+  #      state: 10
+#    then:
+      # Systemzeit mit RTC syncen
+#      ds1302.read_time:
+  - priority: 900.0
+    then:
+#      - lambda: |-
+#          id(radar_bluetooth).turn_off();
+
+  project:
+    name: "f01.23524"
+    version: "${version}"
+
+  min_version: 2024.2.0
+#####################################################################################
+# Define Board
 esp32:
   board: esp32dev
   framework:
     type: arduino
+  
+#dashboard_import:
+#  package_import_url: github://ApolloAutomation/MSR-1/Integrations/ESPHome/MSR-1.yaml
+#  import_full_config: false
 
 # Enable logging
 logger:
@@ -17,9 +71,23 @@ logger:
 # level: verbose
 # level: very_verbose
 
-#mdns:
-#  disabled: false
-
+#####################################################################################
+mdns:
+  disabled: false #default
+#####################################################################################
+globals:
+  - id: cycleCounter
+    type: int
+    restore_value: no
+    initial_value: '0'
+  - id: button_press_timestamp
+    restore_value: no
+    type: uint32_t
+    initial_value: '0'
+  - id: page
+    type: int
+    initial_value: "1"
+#####################################################################################
 # Enable Home Assistant API
 api:
   encryption:
@@ -27,9 +95,12 @@ api:
 
 ota:
   password: "c909206f1243c0a4a80216f7a40df79c"
+  safe_mode: false
 
 wifi:
-  ssid: !secret wifi_ssid
+  power_save_mode: none
+  fast_connect: true
+  ssid: 6wlan # !secret wifi_ssid
   password: !secret wifi_password
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
@@ -39,45 +110,16 @@ wifi:
 
 captive_portal:
 
+#####################################################################################
 web_server:
   port: 80
+  version: 2
+  local: true
+  auth:
+    username: f01
+    password: control
 
-time:
-  - platform: sntp
-    id: esphome_time
-    servers:
-      - 0.pool.ntp.org
-
-binary_sensor:
-  - platform: status
-    name: "f01 Status"  
-    id: f01_status
-
-  - platform: gpio
-    pin: GPIO35 
-    name: "f01 taster35"
-    id: f01_taster35
-    filters:
-      - delayed_on: 30ms
-      - delayed_off: 30ms     
-#    on_press:
-#      then:
-#      - switch.toggle: my_led 
-#      - delay: 1000ms
-    on_release:
-      then: 
-      - switch.toggle: pin23 #25
-      - delay: 500ms
-      - switch.toggle: pin19 #26
-      - delay: 500ms
-      - switch.toggle: pin18 #27
-      - delay: 500ms
-      - switch.toggle: pin4 #14
-      - delay: 500ms
-      - switch.toggle: pin2 #12
-      - delay: 500ms
-
-# Component xxxxxx took a long time for an operation  10kHz min 20works def 50kHz  fix = frequency 400kHz
+# Set Up Key Ports For Communication
 i2c:
    - id: bus_a
      sda: GPIO21
@@ -90,88 +132,393 @@ i2c:
      scan: true
      #frequency: 10kHz
 
+##uart:
+#  tx_pin: GPIO25
+#  rx_pin: GPIO26
+#  baud_rate: 256000
+#  parity: NONE
+#  stop_bits: 1
+#####################################################################################
+# Numbers For Configuration
+number:
+
+  - platform: template
+    name: BME280 Humidity Offset
+    id: bme280_humidity_offset
+    restore_value: true
+    initial_value: -18.86
+    min_value: -70.0
+    max_value: 70.0
+    entity_category: "CONFIG"
+    unit_of_measurement: "%"
+    optimistic: true
+    update_interval: never
+    step: 0.1
+    mode: box
+
+  - platform: template
+    name: BME280 Temperature Offset
+    id: bme280_temperature_offset
+    restore_value: true
+    initial_value: 14.54
+    min_value: -70.0
+    max_value: 70.0
+    entity_category: "CONFIG"
+    unit_of_measurement: "°C"
+    optimistic: true
+    update_interval: never
+    step: 0.1
+    mode: box
+
+#####################################################################################
+# Buzzer
+output:
+  - platform: ledc
+    pin: GPIO23
+    id: buzzer
+rtttl:
+ output: buzzer
+
+#####################################################################################
+time:
+#parallel dauerhaft versuchen über wifi die Zeit zu syncen
+  - platform: homeassistant
+    id: my_time
+    #on_time_sync:
+    #  then:
+        #- logger.log: "Synchronized system clock"
+        #update der RTC
+        #ds1302.write_time:
+         #id: ds1302_time
+
+  - platform: homeassistant
+    id: my_time2
+    on_time:
+      - seconds: /10
+        then:
+        - light.toggle: rgb_light
+#####################################################################################
+#####################################################################################
+# Binary Sensor definition
+# Präsenzsensor
+binary_sensor:
+  - platform: template
+    name: "${friendly_name} speedtestdl 01"
+    device_class: CONNECTIVITY
+    lambda: |-
+      if (id(speedtestdownload).state > 1) {
+        // car is in the garage
+        return true;
+      } else {
+        // no car
+        return false;
+      } 
+
+  - platform: template
+    name: "${friendly_name} speedtestup 02"
+    device_class: CONNECTIVITY
+    lambda: |-
+      if (id(speedtestupload).state > 1) {
+        // car is in the garage
+        return true;
+      } else {
+        // no car
+        return false;
+      } 
+#####################################################################################
+  - platform: status
+    name: "${friendly_name} Online"
+    id: ink_ha_connected
+  - platform: gpio
+    pin: 
+      number: GPIO33
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    id: reset_button
+    on_press:
+      then:
+        - lambda: |-
+            id(button_press_timestamp) = millis();
+            
+    on_release:
+      then:
+
+  - platform: gpio
+    pin: GPIO36 #links oben orange
+    id: taster1   
+    name: "${friendly_name} taster1"
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = (id(page) - 1);
+         if (id(page) < 1) {
+          id(page) = 1;
+         }
+
+  - platform: gpio
+    pin: GPIO39 #rechts oben sw
+    id: taster2
+    name: "${friendly_name} taster2"   
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = (id(page) + 1);
+         if (id(page) > 4) {
+          id(page) = 4;
+         }
+
+  - platform: gpio
+    pin: GPIO34 #links unten
+    id: taster3   
+    name: "${friendly_name} taster3"
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = 1;
+
+
+  - platform: gpio
+    pin: GPIO35 #rechts unten
+    id: taster4
+    name: "${friendly_name} taster4"   
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = 4;
+#####################################################################################
 sensor:
+  - platform: homeassistant
+    id: speedtestdownload
+    entity_id: sensor.speedtest_download
+    internal: true
+
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: speedtestdownload
+    name: "${friendly_name} speedtestdl"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"  
+
+  - platform: homeassistant
+    id: speedtestupload
+    entity_id: sensor.speedtest_upload
+    internal: true
+    filters: 
+      - round: 1 # will round to 1 decimal place
+
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: speedtestupload
+    name: "${friendly_name} speedtestup"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"  
+
+#####################################################################################
+  - platform: internal_temperature
+    name: "f01 ESP Temperature"
+    id: sys_esp_temperature
+
   - platform: bme280_i2c
+    id: bme_280
+    temperature:
+      name: "f01 BME280a Temperature"
+      id: bme280temperature
+      filters:
+        - lambda: return x - id(bme280_temperature_offset).state;
+    pressure:
+      name: "f01 BME280a Pressure"
+      id: bme280pressure
+    humidity:
+      name: "f01 BME280a Humidity"
+      id: bme280humidity
+      filters:
+        - lambda: return x - id(bme280_humidity_offset).state;
+    update_interval: 60s
     i2c_id: bus_a
     address: 0x76
-    temperature:
-      name: "BME280a Temperature"
-      id: f01_bme280a_temperature
-    pressure:
-      name: "BME280a Pressure"
-      id: f01_bme280a_pressure
-    humidity:
-      name: "BME280a Humidity"
-      id: f01_bme280a_humidity
-    update_interval: 30s #15 test1 sync foto msg console ,20 eco
 
   - platform: bme280_i2c
     i2c_id: bus_b
     address: 0x76
     temperature:
-      name: "BME280b Temperature"
+      name: "f01 BME280b Temperature"
       id: f01_bme280b_temperature
     pressure:
-      name: "BME280b Pressure"
+      name: "f01 BME280b Pressure"
       id: f01_bme280b_pressure
     humidity:
-      name: "BME280b Humidity"
+      name: "f01 BME280b Humidity"
       id: f01_bme280b_humidity
-    update_interval: 30s #10s= errors,  40s slow cold ice
+    update_interval: 30s 
 
-  - platform: wifi_signal
-    name: "f01 WiFi Signal"
-    id: f01_wifisignal
-    update_interval: 4s     #60s
+  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
+    name: "${friendly_name} WiFi Signal"
+    id: wifi_signal_db
+    update_interval: 4s     #60s 120s
     filters:
       - sliding_window_moving_average:
           window_size: 15
           send_every: 15
           send_first_at: 1
+    entity_category: "diagnostic"
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: wifi_signal_db
+    name: "${friendly_name} WiFi Signal Percent"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"  #Signal %
+    entity_category: "diagnostic"
 
   - platform: uptime
-    name: "f01 Uptime Sensor" 
-    id: f01_uptimesensor
-
+    name: "${friendly_name} Uptime Sensor" 
+    id: ${friendly_name}_uptimesensor
+#####################################################################################
 switch:
   - platform: restart
     name: "f01 Restart"
     id: f01_restart   
 
-  - platform: shutdown
-    name: "f01 Shutdown"  
-    id: f01_shutdown
+#  - platform: shutdown
+#    name: "f01 Shutdown"  
+#    id: f01_shutdown
 
   - platform: gpio
-    pin: GPIO23
+    pin: GPIO5
     id: pin23
-    name: "23Relais1"
+    name: "f01 523Relais1"
 
   - platform: gpio
     pin: GPIO19
     id: pin19
-    name: "19Relais2"
+    name: "f01 19Relais2"
 
   - platform: gpio
     pin: GPIO18
     id: pin18
-    name: "18Relais3"
+    name: "f01 18Relais3"
 
   - platform: gpio
     pin: GPIO4
     id: pin4
-    name: "04Relais4"
+    name: "f01 04Relais4"
 
   - platform: gpio
     pin: GPIO2
     id: pin2
-    name: "02Relais5"
-
+    name: "f01 02Relais5"
+#####################################################################################
+# Text Sensor definition
+# WIFI Info Bereich
 text_sensor:
   - platform: wifi_info
     ip_address:
-      name: "f01 IP Address"
-      id: f01_ipaddress
+      name: "${friendly_name} IP Address"
     ssid:
-      name: "f01 Connected SSID"
-      id: f01_connectedssid
+      name: "${friendly_name} Connected SSID"
+    bssid:
+      name: "${friendly_name} Connected BSSID"
+    mac_address:
+      name: "${friendly_name} Mac Wifi Address"
+
+  - platform: template
+    id: time_utctime
+    name: Time utctime 
+    # Alternatively, you can use .utcnow() to get the current UTC time.
+    lambda: | 
+      auto time_text = id(my_time).now().strftime("%Y-%m-%d %H:%M");
+      return {time_text};
+    update_interval: 120s
+
+  - platform: template
+    id: time_mytime1
+    name: Time mytime1
+    # Alternatively, you can use .utcnow() to get the current UTC time. %Y-%m-%d %H:%M:%S
+    lambda: | 
+      auto time_text = id(my_time).now().strftime("%d.%m.%Y %H:%M:%S");
+      return {time_text};
+    update_interval: 60s
+
+  - platform: template
+    id: time_mytime2
+    name: Time mytime2
+    # Alternatively, you can use .utcnow() to get the current UTC time. %Y-%m-%d %H:%M:%S
+    lambda: | 
+      auto time_text = id(my_time).now().strftime("%H:%M:%S %d.%m.%Y");
+      return {time_text};
+    update_interval: 10s
+#####################################################################################
+light:
+  - platform: neopixelbus
+    id: rgb_light
+    type: GRB
+    variant: WS2812x
+    pin: GPIO27
+    num_leds: 1
+    name: "f01 RGB Light"
+    method:
+      type: esp32_rmt
+      channel: 0
+#####################################################################################
+button:
+#  - platform: restart
+#    icon: mdi:power-cycle
+#    name: "ESP Reboot"
+
+#  - platform: factory_reset
+#    disabled_by_default: True
+#    name: "Factory Reset ESP"
+#    id: factory_reset_all
+#####################################################################################
+#Used To Control RGB Light On Startup. Tells User Status Of Device
+interval:
+  - interval: 1s
+    then:
+      - if:
+          condition:
+            - binary_sensor.is_off: ink_ha_connected
+            - lambda: 'return id(cycleCounter) < 30;'
+#            - switch.is_on: startup_light_blink
+
+          then:
+            - light.toggle:
+                id: rgb_light
+            - lambda: 'id(cycleCounter) += 1;'
+
+  - interval: 1s
+    then:
+      - if:
+          condition:
+            - binary_sensor.is_off: ink_ha_connected
+            - lambda: 'return id(cycleCounter) > 30;'
+            - lambda: 'return id(cycleCounter) < 31;'
+#            - switch.is_on: startup_light_blink
+
+          then:
+            - light.turn_off:
+                id: rgb_light
+            - lambda: 'id(cycleCounter) += 1;'
+#####################################################################################
+#auto scroll pages 10s
+  - interval: 50s #30s fast 
+    then:
+      - lambda: |-
+          id(page) = (id(page) + 1);
+          if (id(page) > 4) {
+          id(page) = 1;
+          }
+
+#####################################################################################

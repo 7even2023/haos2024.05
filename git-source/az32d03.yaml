@@ -1,11 +1,46 @@
+substitutions:
+  devicename: az32d03
+  friendly_name: d03
+  # ------------------
+  #   Pin-Belegung / Switch     # GND über 19   kabel schwarz/black
+  # ------------------
+ # statusled_01red_pin: GPIO26   # a01 26Relais1 kabel lila/purple
+ # statusled_02green_pin: GPIO19 # a01 19Relais2 kabel grau/grey
+ #  statusled_03blue_pin: GPIO18  # a01 18Relais3 kabel weiss/white
+  
+ # statusled_04red_pin: GPIO4    # a01 04Relais4 kabel blau/blue
+ # statusled_05green_pin: GPIO2  # a01 02Relais5 Kabel grün/green
+
+#  pir_pin: GPIO25               # a01 Bewegung
+#  dht_pin: GPIO23               # a06 has bme and dht11 after b07 b08 is dht11 only pin 25 normal motion ^^ pin 23
+#  led_pin: GPIO23               # a01 27Relais0 led_id mytime2
+#  rgb_pin: GPIO14               # a01_light 8x WS2812B
+
 esphome:
-  name: az32d03
-  friendly_name: az32d03
+  name: $devicename
+  friendly_name: d03
+  #on_boot:
+  #  - binary_sensor.template.publish:
+  #      id: timer_sensor
+  #      state: False
+  #  - binary_sensor.template.publish:
+  #      id: script_running_sensor
+  #      state: False
+  #  - sensor.template.publish:
+  #      id: countdown_count
+  #      state: 10
+#    then:
+      # Systemzeit mit RTC syncen
+#      ds1302.read_time:
 
 esp32:
   board: esp32dev
   framework:
     type: arduino
+
+# Example configuration entry with additional service , ping port
+mdns:
+  disabled: false #default
 
 # Enable logging
 logger:
@@ -13,12 +48,12 @@ logger:
 # level: error
 # level: warn
 # level: info
-  level: debug
+#  level: debug
 # level: verbose
 # level: very_verbose
 
-mdns:
-  disabled: false
+debug:
+#   update_interval: 5s
 
 # Enable Home Assistant API
 api:
@@ -29,55 +64,268 @@ ota:
   password: "8a107b14cee3d9e13c41cdebbc024b41"
 
 wifi:
-  ssid: 7wlan # !secret wifi_ssid
+  fast_connect: true
+  ssid: 6wlan # !secret wifi_ssid
   password: !secret wifi_password
-#  power_save_mode: none
-#  reboot_timeout: 0s
-#  #domain: ".local"
-#  output_power: 20dB
-#  fast_connect: true
-
-#  manual_ip:
-#    static_ip: 192.168.1.168 # 3EG5-Garten (A) = Bereich ,  d3 unter test 1 lcd1602 time+ date over ha + 4tasten test 
-#    gateway: 192.168.1.1
-#    subnet: 255.255.255.0 # subnet2 test 255.255.0.0
-#    dns1: 192.168.1.1
-#    dns2: 8.8.8.8
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Az32D03 Fallback Hotspot"
-    password: "WFYs0f1sNZIZ"
+    ssid: "Az32E08 Fallback Hotspot"
+    password: "Ank01AtoBnD8"
 
 captive_portal: # fallback webseite netzwerkauswahl
+#####################################################################################
+web_server:
+  port: 80
+  version: 2
+  local: true
+  auth:
+    username: d03
+    password: control
 
-web_server:  # aktiv mit domain: ".local"
-  port: 80 
-
-#i2c: #(0x27,16,2) lcd1602 PCF8574T, 1=GND, 2=+5V, 3=SDA(orange)auf PIN21, 4=SCL(gelb)auf PIN22 
-#  sda: GPIO21  #32
-#  scl: GPIO22  #33
-#  scan: True
-#  id: bus_a
-#  frequency: 50kHz  # Component xxxxxx took a long time for an operation  10kHz min 20works def 50kHz  fix = frequency 400kHz 
-
+#i2c: #(0x27,16,2) lcd1602 PCF8574T, 1=GND, 2=+5V, 3=SDA(orange)auf PIN13, 4=SCL(gelb)auf PIN14  (!PIN12 strapping pin not used)
+#######################################################################
+# I2C SETUP
 i2c:
-   - id: bus_a
-     sda: GPIO21
-     scl: GPIO22
-     scan: true
-     frequency: 400kHz
-   - id: bus_b
-     sda: GPIO32  #GPIO32 17
-     scl: GPIO33  #GPIO33 18
-     scan: true
+  - id: bus_a
+    sda: 21
+    scl: 22
+    scan: true
+    frequency: 400kHz # fix warnings
+  - id: bus_b
+    sda: GPIO32  #GPIO32 17
+    scl: GPIO33  #GPIO33 18
+    scan: true
      #frequency: 10kHz   # out comment = def 50kHz
 
+#####################################################################################
 time:
+#parallel dauerhaft versuchen über wifi die Zeit zu syncen
   - platform: homeassistant
     id: my_time
+    #on_time_sync:
+    #  then:
+        #- logger.log: "Synchronized system clock"
+        #update der RTC
+        #ds1302.write_time:
+         #id: ds1302_time
 
+  - platform: homeassistant
+    id: my_time2
+    on_time:
+      - seconds: /10
+        then:
+        - switch.toggle: led_id
+#####################################################################################
+# Binary Sensor definition
+# Präsenzsensor
+binary_sensor:
+  - platform: template
+    name: "${friendly_name} speedtestdl 01"
+    device_class: CONNECTIVITY
+    lambda: |-
+      if (id(speedtestdownload).state > 1) {
+        // car is in the garage
+        return true;
+      } else {
+        // no car
+        return false;
+      } 
+
+  - platform: template
+    name: "${friendly_name} speedtestup 02"
+    device_class: CONNECTIVITY
+    lambda: |-
+      if (id(speedtestupload).state > 1) {
+        // car is in the garage
+        return true;
+      } else {
+        // no car
+        return false;
+      } 
+#####################################################################################
+# Binary Sensor definition 2
+
+  - platform: gpio
+    pin: GPIO36 #links oben orange
+    id: taster1   
+    name: taster1
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = (id(page) - 1);
+         if (id(page) < 1) {
+          id(page) = 1;
+         }
+
+  - platform: gpio
+    pin: GPIO39 #rechts oben sw
+    id: taster2
+    name: taster2   
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = (id(page) + 1);
+         if (id(page) > 4) {
+          id(page) = 4;
+         }
+
+  - platform: gpio
+    pin: GPIO34 #links unten
+    id: taster3   
+    name: taster3
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = 1;
+
+
+  - platform: gpio
+    pin: GPIO35 #rechts unten
+    id: taster4
+    name: taster4   
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = 4;
+#####################################################################################         
 sensor:
+  - platform: homeassistant
+    id: speedtestdownload
+    entity_id: sensor.speedtest_download
+    internal: true
+
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: speedtestdownload
+    name: "${friendly_name} speedtestdl"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"  
+
+  - platform: homeassistant
+    id: speedtestupload
+    entity_id: sensor.speedtest_upload
+    internal: true
+    filters: 
+      - round: 1 # will round to 1 decimal place
+
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: speedtestupload
+    name: "${friendly_name} speedtestup"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"  
+
+#####################################################################################
+
+  - platform: template
+    id: time_second
+    name: Time second   
+    # Seconds after the minute [0-60] (generally [0-59], extra range is to accommodate leap seconds.)
+    lambda: |- 
+      char str[30];
+      auto time = id(my_time).now();   
+      return time.second;
+
+  - platform: template
+    id: time_minutes
+    name: Time minute   
+    # Minutes after the hour [0-59]
+    lambda: |- 
+      char str[30];
+      auto time = id(my_time).now();   
+      return time.minute; 
+
+  - platform: template
+    id: time_hour
+    name: Time hour   
+    # Hours since midnight [0-23]
+    lambda: |- 
+      char str[30];
+      auto time = id(my_time).now();   
+      return time.hour; 
+
+  - platform: template
+    id: time_year
+    name: Time year   
+    # Year since 0 A.C. [1970-∞[2018
+    lambda: |- 
+      char str[30];
+      auto time = id(my_time).now();   
+      return time.year; 
+
+  - platform: template
+    id: time_month
+    name: Time month   
+    # Month, january=1 	[1-12]	
+    lambda: |- 
+      char str[30];
+      auto time = id(my_time).now();   
+      return time.month; 
+
+  - platform: template
+    id: time_dayofweek
+    name: Time dayofweek  
+    # Day of the week, sunday=1 [1-7] 7 (saturday)
+    lambda: |- 
+      char str[30];
+      auto time = id(my_time).now();   
+      return time.day_of_week; 
+
+  - platform: template
+    id: time_dayofmonth
+    name: Time dayofmonth  
+     # Day of the month [1-31]
+    lambda: |- 
+      char str[30];
+      auto time = id(my_time).now();   
+      return time.day_of_month; 
+
+  - platform: template
+    id: time_dayofyear
+    name: Time dayofyear
+     # Day of the year [1-365]
+    lambda: |- 
+      char str[30];
+      auto time = id(my_time).now();   
+      return time.day_of_year; 
+
+  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
+    name: "${friendly_name} WiFi Signal"
+    id: wifi_signal_db
+    update_interval: 4s     #60s 120s
+    filters:
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 15
+          send_first_at: 1
+    entity_category: "diagnostic"
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: wifi_signal_db
+    name: "${friendly_name} WiFi Signal Percent"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"  #Signal %
+    entity_category: "diagnostic"
+
+  - platform: uptime
+    name: "${friendly_name} Uptime Sensor" 
+    id: ${friendly_name}_uptimesensor
+
+#####################################################################################
+
   - platform: bme280_i2c
     i2c_id: bus_b
     address: 0x76
@@ -138,59 +386,68 @@ interval:
           id(page) = 1;
         }
 
-binary_sensor:
-  - platform: gpio
-    pin: GPIO36 #links oben orange
-    id: taster1   
-    name: taster1
-    filters:
-      - delayed_on: 30ms
-      - delayed_off: 30ms
-    on_press:
-      then: 
-       lambda: |-
-         id(page) = (id(page) - 1);
-         if (id(page) < 1) {
-          id(page) = 1;
-         }
+#####################################################################################
 
-  - platform: gpio
-    pin: GPIO39 #rechts oben sw
-    id: taster2
-    name: taster2   
-    filters:
-      - delayed_on: 30ms
-      - delayed_off: 30ms
-    on_press:
-      then: 
-       lambda: |-
-         id(page) = (id(page) + 1);
-         if (id(page) > 4) {
-          id(page) = 4;
-         }
-
-  - platform: gpio
-    pin: GPIO34 #links unten
-    id: taster3   
-    name: taster3
-    filters:
-      - delayed_on: 30ms
-      - delayed_off: 30ms
-    on_press:
-      then: 
-       lambda: |-
-         id(page) = 1;
-
-
-  - platform: gpio
-    pin: GPIO35 #rechts unten
-    id: taster4
-    name: taster4   
-    filters:
-      - delayed_on: 30ms
-      - delayed_off: 30ms
-    on_press:
-      then: 
-       lambda: |-
-         id(page) = 4;
        
+#####################################################################################
+# Button definition Richtige buttons visit web oberfläche "drücken" = button ,  slider=switch
+switch:
+  - platform: restart
+    name: "${friendly_name} Restart"
+    id: ${friendly_name}_restart   
+
+  - platform: gpio
+    pin: GPIO23
+    id: led_id
+    name: "${friendly_name} 10s Relais"
+
+button:
+# Neustart ESP
+#  - platform: restart
+#    name: "Restart"
+# Herunterfahren ESP
+#  - platform: shutdown
+#    name: "Shutdown"
+
+#####################################################################################
+# Text Sensor definition
+# WIFI Info Bereich
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+    ssid:
+      name: "${friendly_name} Connected SSID"
+    bssid:
+      name: "${friendly_name} Connected BSSID"
+    mac_address:
+      name: "${friendly_name} Mac Wifi Address"
+
+  - platform: template
+    id: time_utctime
+    name: Time utctime 
+    # Alternatively, you can use .utcnow() to get the current UTC time.
+    lambda: | 
+      auto time_text = id(my_time).now().strftime("%Y-%m-%d %H:%M");
+      return {time_text};
+    update_interval: 60s
+
+  - platform: template
+    id: time_mytime1
+    name: Time mytime1
+    # Alternatively, you can use .utcnow() to get the current UTC time. %Y-%m-%d %H:%M:%S
+    lambda: | 
+      auto time_text = id(my_time).now().strftime("%d.%m.%Y %H:%M:%S");
+      return {time_text};
+    update_interval: 60s
+
+  - platform: template
+    id: time_mytime2
+    name: Time mytime2
+    # Alternatively, you can use .utcnow() to get the current UTC time. %Y-%m-%d %H:%M:%S
+    lambda: | 
+      auto time_text = id(my_time).now().strftime("%H:%M:%S %d.%m.%Y");
+      return {time_text};
+    update_interval: 1s
+
+    

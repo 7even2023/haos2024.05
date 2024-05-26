@@ -1,6 +1,7 @@
 # esphome config file with all features
 substitutions:
   devicename: az32d07 #ehmtx8266
+  friendly_name: d07
   ledpin: GPIO26  # 02
   board: esp32dev # d1_mini
   loglevel: DEBUG
@@ -12,7 +13,7 @@ external_components:
 
 esphome:
   name: $devicename # az32d07
-  # friendly_name: az32d07
+  friendly_name: d07
   on_boot:
     priority: -100
     then: 
@@ -42,9 +43,6 @@ esphome:
           green: !lambda return 150;
           blue: !lambda return 30;
 
-web_server:
-  port: 80
-
 esp32:
   board: $board # esp32dev
 #  framework:
@@ -64,12 +62,28 @@ logger:
 api:
   encryption:
     key: "wr1SseDrJ3gsYhW0Z+OuEJHKXbtR3Rhxxzd7+I8OXos="
+  reboot_timeout: 0s
+  services:
+    - service: write_text
+      variables:
+        message: string
+      then:
+        - globals.set:
+            id: matrix_text1
+            value: !lambda 'return message;'
+
+        - delay: 20s
+        - globals.set:
+            id: matrix_text1
+            value: !lambda 'return "";'
 
 ota:
   password: "43dbc40374e8e97d900c5a305fb4c7e9"
 
 wifi:
-  ssid: 7wlan # !secret wifi_ssid
+  power_save_mode: none
+  fast_connect: true
+  ssid: 6wlan # !secret wifi_ssid
   password: !secret wifi_password
 #  power_save_mode: none
 #  reboot_timeout: 0s
@@ -90,13 +104,21 @@ wifi:
     password: "B4fPJ7nxBQSk"
 
 captive_portal:
+#####################################################################################
+web_server:
+  port: 80
+  version: 2
+  local: true
+  auth:
+    username: d07
+    password: control
 
 light:
   - platform: neopixelbus
     id: ehmtx_light
     type: GRB
     variant: WS2812
-    pin: $ledpin
+    pin: $ledpin      # GPIO26 signal-3er mitte 
     num_leds: 256
     color_correct: [30%, 30%, 30%]
     name: "$devicename Light"
@@ -107,10 +129,242 @@ light:
     on_turn_off:
        lambda: |-
          id(ehmtx_display)->set_enabled(true);
+#####################################################################################
+  - platform: neopixelbus
+    id: rgb_light
+    type: GRB
+    variant: WS2812x
+    pin: GPIO23
+    num_leds: 1
+    name: "${friendly_name} RGB Light"
+    method:
+      type: esp32_rmt
+      channel: 0
+#####################################################################################
+
+# Set Up Key Ports For Communication
+i2c:
+   - id: bus_a
+     sda: GPIO21
+     scl: GPIO22
+     scan: true
+     #frequency: 400kHz
+   - id: bus_b
+     sda: GPIO16
+     scl: GPIO17
+     scan: true
+     #frequency: 10kHz
+
+##uart:
+#  tx_pin: GPIO25
+#  rx_pin: GPIO26
+#  baud_rate: 256000
+#  parity: NONE
+#  stop_bits: 1
+#####################################################################################
+# Numbers For Configuration
+number:
+
+  - platform: template
+    name: BME280 Humidity Offset
+    id: bme280_humidity_offset
+    restore_value: true
+    initial_value: -18.86
+    min_value: -70.0
+    max_value: 70.0
+    entity_category: "CONFIG"
+    unit_of_measurement: "%"
+    optimistic: true
+    update_interval: never
+    step: 0.1
+    mode: box
+
+  - platform: template
+    name: BME280 Temperature Offset
+    id: bme280_temperature_offset
+    restore_value: true
+    initial_value: 14.54
+    min_value: -70.0
+    max_value: 70.0
+    entity_category: "CONFIG"
+    unit_of_measurement: "°C"
+    optimistic: true
+    update_interval: never
+    step: 0.1
+    mode: box
+
+#####################################################################################
+#----------------------------
+#   Globale Variablen
+#----------------------------
+globals:
+  - id: x
+    type: std::string
+    restore_value: no
+    initial_value: ''
+
+  - id: matrix_text1
+    type: std::string
+    restore_value: no
+    initial_value: ''
+
+  - id: anim_pos
+    type: int
+    restore_value: no
+    initial_value: '0'
+
+  - id: display_page   ##Test2
+    type: int
+    restore_value: no
+    initial_value: '1'
+
+  - id: cycleCounter
+    type: int
+    restore_value: no
+    initial_value: '0'
+
+  - id: button_press_timestamp
+    restore_value: no
+    type: uint32_t
+    initial_value: '0'
+
+  - id: page
+    type: int
+    initial_value: "1"
+#####################################################################################
 
 time:
   - platform: homeassistant
     id: ehmtx_time
+
+#parallel dauerhaft versuchen über wifi die Zeit zu syncen
+  - platform: homeassistant
+    id: my_time
+    #on_time_sync:
+    #  then:
+        #- logger.log: "Synchronized system clock"
+        #update der RTC
+        #ds1302.write_time:
+         #id: ds1302_time
+
+  - platform: homeassistant
+    id: my_time2
+    on_time:
+      - seconds: /10
+        then:
+#        - light.toggle: rgb_light
+
+#####################################################################################
+# Binary Sensor definition
+# Präsenzsensor
+binary_sensor:
+  - platform: template
+    name: "${friendly_name} speedtestdl 01"
+    device_class: CONNECTIVITY
+    lambda: |-
+      if (id(speedtestdownload).state > 1) {
+        // car is in the garage
+        return true;
+      } else {
+        // no car
+        return false;
+      } 
+
+  - platform: template
+    name: "${friendly_name} speedtestup 02"
+    device_class: CONNECTIVITY
+    lambda: |-
+      if (id(speedtestupload).state > 1) {
+        // car is in the garage
+        return true;
+      } else {
+        // no car
+        return false;
+      } 
+#####################################################################################
+  - platform: status
+    name: "${friendly_name} Online"
+    id: ink_ha_connected
+  - platform: gpio
+    pin: 
+      number: GPIO33
+      inverted: true
+      mode:
+        input: true
+        pullup: true
+    id: reset_button
+    on_press:
+      then:
+        - lambda: |-
+            id(button_press_timestamp) = millis();
+            
+    on_release:
+      then:
+
+  - platform: template
+    name: "d07 hell"
+    lambda: |-
+          if (id(source_sensor0).state > 70) {
+            return true;
+          } else {
+            return false;
+          }
+
+
+  - platform: gpio
+    pin: GPIO36 #links oben orange
+    id: taster1   
+    name: "${friendly_name} taster1"
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = (id(page) - 1);
+         if (id(page) < 1) {
+          id(page) = 1;
+         }
+
+  - platform: gpio
+    pin: GPIO39 #rechts oben sw
+    id: taster2
+    name: "${friendly_name} taster2"   
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = (id(page) + 1);
+         if (id(page) > 4) {
+          id(page) = 4;
+         }
+
+  - platform: gpio
+    pin: GPIO34 #links unten
+    id: taster3   
+    name: "${friendly_name} taster3"
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = 1;
+
+
+  - platform: gpio
+    pin: GPIO35 #rechts unten
+    id: taster4
+    name: "${friendly_name} taster4"   
+    filters:
+      - delayed_on: 30ms
+      - delayed_off: 30ms
+    on_press:
+      then: 
+       lambda: |-
+         id(page) = 4;
 
 display:
   - platform: addressable_light
@@ -130,10 +384,186 @@ display:
       id(rgb8x32)->tick();
       id(rgb8x32)->draw();
 
+#####################################################################################
 sensor:
-  - platform: uptime
-    name: Uptime Sensor
+  - platform: homeassistant
+    name: "Matrix Text"
+    id: matrix_text
+    entity_id: input_text.matrix_text1  # !!!helper2
 
+  - platform: homeassistant
+    id: speedtestdownload
+    entity_id: sensor.speedtest_download
+    internal: true
+
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: speedtestdownload
+    name: "${friendly_name} speedtestdl"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"  
+
+  - platform: homeassistant
+    id: speedtestupload
+    entity_id: sensor.speedtest_upload
+    internal: true
+    filters: 
+      - round: 1 # will round to 1 decimal place
+
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: speedtestupload
+    name: "${friendly_name} speedtestup"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%" 
+
+#####################################################################################
+  - platform: internal_temperature
+    name: "d07 ESP Temperature"
+    id: sys_esp_temperature
+
+  - platform: bme280_i2c
+    id: bme_280
+    temperature:
+      name: "d07 BME280a Temperature"
+      id: bme280temperature
+      filters:
+        - lambda: return x - id(bme280_temperature_offset).state;
+    pressure:
+      name: "d07 BME280a Pressure"
+      id: bme280pressure
+    humidity:
+      name: "d07 BME280a Humidity"
+      id: bme280humidity
+      filters:
+        - lambda: return x - id(bme280_humidity_offset).state;
+    update_interval: 60s
+    i2c_id: bus_a
+    address: 0x76
+
+  - platform: bme280_i2c
+    i2c_id: bus_b
+    address: 0x76
+    temperature:
+      name: "d07 BME280b Temperature"
+      id: f01_bme280b_temperature
+    pressure:
+      name: "d07 BME280b Pressure"
+      id: f01_bme280b_pressure
+    humidity:
+      name: "d07 BME280b Humidity"
+      id: f01_bme280b_humidity
+    update_interval: 30s 
+
+  # Fotowiderstand (siehe Schaltplan rechts (links=5vBuchse)):
+  -  platform: adc
+     id: source_sensor0
+     name: "${friendly_name} Foto Sensor32"
+     pin: GPIO32  #33 orginal
+     update_interval: 10s
+     filters:
+        - offset: 0.0
+        - multiply: 1.0  #3.3
+        - calibrate_linear:
+          - 0.0700 -> -10.00      
+          - 0.5 -> 60.00           
+          - 1.045 -> 90.69       
+     unit_of_measurement: "%"  
+
+  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
+    name: "${friendly_name} WiFi Signal"
+    id: wifi_signal_db
+    update_interval: 4s     #60s 120s
+    filters:
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 15
+          send_first_at: 1
+    entity_category: "diagnostic"
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: wifi_signal_db
+    name: "${friendly_name} WiFi Signal Percent"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"  #Signal %
+    entity_category: "diagnostic"
+
+  - platform: uptime
+    name: "${friendly_name} Uptime Sensor" 
+    id: uptimesensor
+
+#####################################################################################
+# Text Sensor definition
+# WIFI Info Bereich
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+    ssid:
+      name: "${friendly_name} Connected SSID"
+    bssid:
+      name: "${friendly_name} Connected BSSID"
+    mac_address:
+      name: "${friendly_name} Mac Wifi Address"
+
+  - platform: template
+    id: time_utctime
+    name: Time utctime 
+    # Alternatively, you can use .utcnow() to get the current UTC time.
+    lambda: | 
+      auto time_text = id(my_time).now().strftime("%Y-%m-%d %H:%M");
+      return {time_text};
+    update_interval: 120s
+
+  - platform: template
+    id: time_mytime1
+    name: Time mytime1
+    # Alternatively, you can use .utcnow() to get the current UTC time. %Y-%m-%d %H:%M:%S
+    lambda: | 
+      auto time_text = id(my_time).now().strftime("%d.%m.%Y %H:%M:%S");
+      return {time_text};
+    update_interval: 60s
+
+  - platform: template
+    id: time_mytime2
+    name: Time mytime2
+    # Alternatively, you can use .utcnow() to get the current UTC time. %Y-%m-%d %H:%M:%S
+    lambda: | 
+      auto time_text = id(my_time).now().strftime("%H:%M:%S %d.%m.%Y");
+      return {time_text};
+    update_interval: 10s
+
+#####################################################################################
+switch:
+  - platform: restart
+    name: "${friendly_name} Restart"
+    id: d07_restart  
+
+  - platform: gpio
+    pin: GPIO27
+    id: pin27
+    name: "${friendly_name} 27Relais1"
+
+  - platform: gpio
+    pin: GPIO19
+    id: pin19
+    name: "${friendly_name} 19Relais2"
+
+  - platform: gpio
+    pin: GPIO18
+    id: pin18
+    name: "${friendly_name} 18Relais3"
+
+  - platform: gpio
+    pin: GPIO4
+    id: pin4
+    name: "${friendly_name} 04Relais4"
+
+  - platform: gpio
+    pin: GPIO2
+    id: pin2
+    name: "${friendly_name} 02Relais5"
+#####################################################################################
 image:
    - file: _icons/1pixel.gif
      id: breaking20237
@@ -194,8 +624,66 @@ ehmtx:
       file: _icons/sample8x32.gif
     - id: samplegif
       file: _icons/sample8x8.gif
-  
+#####################################################################################
+    - id: icon_clock                   # analog clock run
+      file: _icons/82_icon_clock.gif 
 
+    - id: icon_tetris                 # tetris red run
+      file: _icons/119_icon_thumb.gif
 
+    - id: icon_hearth                 # herz pulsiert
+      file: _icons/230_icon_hearth.gif
 
-    
+    - id: icon_redpulse                 # roter blink effekt
+      file: _icons/681_icon_thumb.gif
+
+    - id: icon_temp                    # analog temp !!! no ani is png
+      file: _icons/2056_icon_temp.png
+
+    - id: icon_coffee                  # analog cafe hot
+      file: _icons/6396_icon_thumb.gif
+
+    - id: icon_spaceinv                 # analog cafe hot
+      file: _icons/7555_icon_thumb.gif
+
+    - id: icon_rgbclock               # analog cafe hot
+      file: _icons/7655_icon_thumb.gif
+
+    - id: icon_trashyellow1            # gelbe tonne 1 static pic !!! no ani is png
+      file: _icons/11005_icon_thumb.png
+
+    - id: icon_redbluepulse           # roter  blauer blink effekt
+      file: _icons/11188_icon_thumb.gif
+
+    - id: icon_trashgrey1            # schwarze tonne static pic !!! no ani is png
+      file: _icons/11979_icon_thumb.png
+
+    - id: icon_trashblue1            # blaue tonne 1 static pic !!! no ani is png
+      file: _icons/12060_icon_thumb.png
+
+    - id: icon_house1                # haus alarmanlage
+      file: _icons/19786_icon_thumb.gif
+
+    - id: icon_eye1             # auge kuckt
+      file: _icons/20094_icon_thumb.gif
+
+    - id: icon_trashyellow2            # gelbe tonne 2 anideckel  pic !!!  is gif
+      file: _icons/38054_icon_tyellowcap.gif     
+
+    - id: icon_trashcar               # muell-lkw ani pic !!!  is gif
+      file: _icons/51975_icon_trashcar.gif
+
+    - id: icon_trashblue2                  # blaue hin und gelbe weg mit ! tonne 2 ani pic !!!  is gif
+      file: _icons/53807_icon_trashblue.gif
+
+    - id: icon_trashyellow3              # gelbe tonne 3 ani rollen pic !!!  is gif
+      file: _icons/56162_icon_thumb.gif
+
+    - id: icon_trashyellow0             # schwarze tonne static pic !!! no ani is png
+      file: _icons/56166_icon_thumb.png
+
+    - id: icon_trashgrey0           # blaue tonne 1 static pic !!! no ani is png
+      file: _icons/56473_icon_thumb.png
+
+    - id: icon_trashyellow4              # voll vorbringen gelbe tonne 3 ani rollen2 pic !!!  is gif
+      file: _icons/56476_icon_trashyellow.gif

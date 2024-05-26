@@ -1,0 +1,198 @@
+# esphome config file with all features
+substitutions:
+  devicename: az32f04
+  friendly_name: f04
+  adc0pin: GPIO32  # 02
+  board: esp32dev  # d1_mini
+  loglevel: DEBUG
+
+esphome:
+  name: $devicename 
+  friendly_name: $friendly_name
+
+esp32:
+  board: $board
+  framework:
+    type: arduino
+
+logger:
+ level: $loglevel
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "OgO5ROmY7BJrFJF3GgZpi/zzrOyPnPO2E5y3fY+KTOg="
+
+ota:
+  password: "511b833f991cc47bfa6e41f8899e5655"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "F04 Fallback Hotspot"
+    password: "rUF8YrZr2RB9"
+
+captive_portal:
+web_server:
+  port: 80
+  version: 2
+  local: true
+  auth:
+    username: f04
+    password: control
+#####################################################################################
+# globals definition
+globals:
+  - id: adc0_offset100real
+    type: float
+    restore_value: no
+    initial_value: '100'
+
+  - id: adc0_offset0real
+    type: float
+    restore_value: no
+    initial_value: '0'
+#####################################################################################
+# Numbers For Configuration
+number:
+
+  - platform: template
+    name: ADC0 Offset0
+    id: adc0_offset0
+    restore_value: true
+    initial_value: -10.7
+    min_value: -20.0
+    max_value: 100.0
+    entity_category: "CONFIG"
+    unit_of_measurement: "%"
+    optimistic: true
+    update_interval: never
+    step: 0.1
+    mode: box
+
+  - platform: template
+    name: ADC0 Offset100
+    id: adc0_offset100
+    restore_value: true
+    initial_value: 89.7
+    min_value: 0.0
+    max_value: 120.0
+    entity_category: "CONFIG"
+    unit_of_measurement: "%"
+    optimistic: true
+    update_interval: never
+    step: 0.1
+    mode: box
+#####################################################################################
+# binär Sensor definition
+binary_sensor:
+  - platform: template
+    name: "ADC0 0Sensor99 voll"  # blau - voll 
+    lambda: |-
+          if (id(source_sensor0).state > 99) {
+            return true;
+          } else {
+            return false;
+          }
+
+  - platform: template
+    name: "ADC0 1Sensor75 oben"     # grün - über 75%
+    lambda: |-
+          if (id(source_sensor0).state > 75) {
+            return true;
+          } else {
+            return false;
+          }
+
+  - platform: template
+    name: "ADC0 2Sensor25 unten"     # gelb - unter 25%
+    lambda: |-
+          if (id(source_sensor0).state > 25) {
+            return true;
+          } else {
+            return false;
+          } 
+    
+  - platform: template
+    name: "ADC0 3Sensor00 leer"   # rot - leer 10%
+    lambda: |-
+          if (id(source_sensor0).state > 10) {
+            return true;
+          } else {
+            return false;
+          } 
+#####################################################################################
+# Sensor definition
+sensor:
+  -  platform: adc
+     id: source_sensor0
+     name: "ADC0 0Sensor GPIO32"     # Schaltbild mit Pulldown-Widerstand
+     pin: GPIO32  
+     update_interval: 10s      #60s
+     filters:
+        - offset: 0.0
+        - multiply: 1.0  #3.3
+        - calibrate_linear:
+          - 0.0700 -> -10.7    # 0% -10.07 
+          - 0.5 -> 60.00         # 50% 60.00 
+          - 1.045 -> 89.7     # 100% 89.69
+        #- lambda: return x - id(adc0_offset0).state;
+     unit_of_measurement: "%"
+
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: source_sensor0
+    name: "source_sensor0copy1"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%" 
+
+  - platform: template
+    id: source_sensor0copy2
+    name: "source_sensor0copy2"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%" 
+    update_interval: 10s
+
+  - platform: internal_temperature
+    name: "${friendly_name} Temperature"
+    id: sys_esp_temperature
+
+  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
+    name: "${friendly_name} WiFi Signal"
+    id: wifi_signal_db
+    update_interval: 4s     #60s 120s
+    filters:
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 15
+          send_first_at: 1
+    entity_category: "diagnostic"
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: wifi_signal_db
+    name: "${friendly_name} WiFi Signal Percent"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"  #Signal %
+    entity_category: "diagnostic"
+
+  - platform: uptime
+    name: "${friendly_name} Uptime Sensor" 
+    id: uptimesensor
+
+#####################################################################################
+# WIFI Info Bereich
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "${friendly_name} IP Address"
+    ssid:
+      name: "${friendly_name} Connected SSID"
+    bssid:
+      name: "${friendly_name} Connected BSSID"
+    mac_address:
+      name: "${friendly_name} Mac Wifi Address"
+

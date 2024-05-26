@@ -18,7 +18,7 @@ substitutions:
 
 esphome:
   name: $devicename
-  friendly_name: ${friendly_name}
+  friendly_name: b07 # ${friendly_name}
   #friendly_name: az32b07
     # Automation turning on the blue status LED once T1 is booted up
   #on_boot:
@@ -163,15 +163,23 @@ binary_sensor:
           }
 
 sensor:
-  - platform: wifi_signal
+  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
     name: "${friendly_name} WiFi Signal"
-    id: ${friendly_name}_wifisignal
-    update_interval: 4s     #60s
+    id: wifi_signal_db
+    update_interval: 4s     #60s 120s
     filters:
       - sliding_window_moving_average:
           window_size: 15
           send_every: 15
           send_first_at: 1
+    entity_category: "diagnostic"
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: wifi_signal_db
+    name: "${friendly_name} WiFi Signal Percent"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"  #Signal %
+    entity_category: "diagnostic"
 
   - platform: uptime
     name: "${friendly_name} Uptime Sensor" 

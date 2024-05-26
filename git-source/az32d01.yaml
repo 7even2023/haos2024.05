@@ -24,7 +24,7 @@ external_components:
       - ds1302
 
 esphome:
-  name: az32d01
+  name: $devicename
   friendly_name: d01
   on_boot:
     - binary_sensor.template.publish:
@@ -40,14 +40,16 @@ esphome:
       # Systemzeit mit RTC syncen
 #      ds1302.read_time:
 
-
-
 esp32:
   board: esp32dev
   framework:
     type: arduino
     version: 2.0.5
     platform_version: 5.2.0
+
+# Example configuration entry with additional service , ping port
+mdns:
+  disabled: false #default
 
 # Enable logging
 logger:
@@ -171,15 +173,15 @@ interval:
 
 binary_sensor:
   - platform: template
-    name: "Timer Sensor"
+    name: "${friendly_name} Timer Sensor"
     id: timer_sensor
 
   - platform: template
-    name: "Script running"
+    name: "${friendly_name} Script running"
     id: script_running_sensor
 
   - platform: template
-    name: "PIN23LED-ROT hell"
+    name: "${friendly_name} PIN23LED-ROT hell"
     lambda: |-
           if (id(source_sensor2).state > 70) {
             return true;
@@ -316,27 +318,22 @@ sensor:
       auto time = id(ds1302_time).now();   
       return time.day_of_year; 
 
-  - platform: wifi_signal
+  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
     name: "${friendly_name} WiFi Signal"
-    id: ${friendly_name}_wifisignal
-    update_interval: 4s     #60s
+    id: wifi_signal_db
+    update_interval: 4s     #60s 120s
     filters:
       - sliding_window_moving_average:
           window_size: 15
           send_every: 15
           send_first_at: 1
-
-  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
-    name: "WiFi Signal dB"
-    id: wifi_signal_db
-    update_interval: 120s
     entity_category: "diagnostic"
   - platform: copy # Reports the WiFi signal strength in %
     source_id: wifi_signal_db
-    name: "WiFi Signal Percent"
+    name: "${friendly_name} WiFi Signal Percent"
     filters:
       - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
-    unit_of_measurement: "Signal %"
+    unit_of_measurement: "%"  #Signal %
     entity_category: "diagnostic"
 
   - platform: uptime
@@ -405,11 +402,11 @@ switch:
   - platform: gpio
     pin: GPIO23
     id: led_id
-    name: "10s Relais"
+    name: "${friendly_name} 10s Relais"
 
 light:
   - platform: status_led
-    name: "LED blocked by script"
+    name: "${friendly_name} LED blocked by script"
     id: demo_light
     pin: GPIO32
 
